@@ -143,7 +143,7 @@ describe('Parser', () => {
 
   describe('Full Examples', () => {
 
-    glob.sync('*.{mt940,mt940x}', { cwd: __dirname }).forEach(examplePath => {
+    glob.sync('*.mt{940,940x,942}', { cwd: __dirname }).forEach(examplePath => {
       const example = fs.readFileSync(path.resolve(__dirname, examplePath), 'utf-8');
       it(examplePath, () => {
         const parser = new Parser();
