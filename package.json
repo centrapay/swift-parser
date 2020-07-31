@@ -4,9 +4,8 @@
   "description": "javascript mt940 bank statement parser",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "testw": "mocha --watch",
-    "testcov": "nyc mocha",
+    "test": "jest",
+    "testcov": "nyc jest",
     "lint": "eslint lib test cli.js index.js",
     "doc": "jsdoc -c jsdoc.json",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov",
@@ -26,6 +25,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^7.3.0",
+    "jest": "^26.2.1",
     "jsdoc": "^3.6.4",
     "mocha": "^8.0.1",
     "nyc": "^15.1.0"

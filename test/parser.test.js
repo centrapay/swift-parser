@@ -1,4 +1,3 @@
-const assert  = require('chai').assert;
 const Parser  = require('../lib/parser');
 const Tags    = require('../lib/tags');
 const helpers = require('../lib/helperModels');
@@ -143,28 +142,28 @@ describe('Parser', () => {
     it('_splitAndNormalize', () => {
       const parser = new Parser();
       const result = parser._splitAndNormalize('abc   \r\n\r\n-');
-      assert.deepEqual(result, ['abc   ']);
+      expect(result).toEqual(['abc   ']);
     });
 
     it('_parseLines', () => {
       const parser = new Parser();
       const result = [...parser._parseLines(DUMMY_STATEMENT_LINES)];
-      assert.equal(8, result.length);
-      assert.deepEqual(result[0], {id: '20', subId: '',  data: ['B4E08MS9D00A0009']});
-      assert.deepEqual(result[1], {id: '21', subId: '',  data: ['X']});
-      assert.deepEqual(result[2], {id: '25', subId: '',  data: ['123456789']});
-      assert.deepEqual(result[3], {id: '28', subId: 'C', data: ['123/1']});
-      assert.deepEqual(result[4], {id: '60', subId: 'F', data: ['C140507EUR0,00']});
-      assert.deepEqual(result[5], {id: '61', subId: '',  data: ['1405070507C500,00NTRFNONREF//AUXREF']});
-      assert.deepEqual(result[6], {id: '86', subId: '',  data: ['LINE1', 'LINE2']});
-      assert.deepEqual(result[7], {id: '62', subId: 'F', data: ['C140508EUR500,00']});
+      expect(8).toEqual(result.length);
+      expect(result[0]).toEqual({id: '20', subId: '',  data: ['B4E08MS9D00A0009']});
+      expect(result[1]).toEqual({id: '21', subId: '',  data: ['X']});
+      expect(result[2]).toEqual({id: '25', subId: '',  data: ['123456789']});
+      expect(result[3]).toEqual({id: '28', subId: 'C', data: ['123/1']});
+      expect(result[4]).toEqual({id: '60', subId: 'F', data: ['C140507EUR0,00']});
+      expect(result[5]).toEqual({id: '61', subId: '',  data: ['1405070507C500,00NTRFNONREF//AUXREF']});
+      expect(result[6]).toEqual({id: '86', subId: '',  data: ['LINE1', 'LINE2']});
+      expect(result[7]).toEqual({id: '62', subId: 'F', data: ['C140508EUR500,00']});
     });
 
     it('_groupTags', () => {
       const parser = new Parser();
       const groups = [DUMMY_GROUP_SIMPLE, DUMMY_GROUP_COMPLEX];
       const result = parser._groupTags([...DUMMY_GROUP_SIMPLE, ...DUMMY_GROUP_COMPLEX]);
-      assert.deepEqual(result, groups);
+      expect(result).toEqual(groups);
     });
 
     it('_buildStatement', () => {
@@ -186,19 +185,19 @@ describe('Parser', () => {
         extraDetails: '',
         fundsCode: '',
       });
-      assert.deepEqual(result, exp);
-      assert.isUndefined(result.tags);
-      assert.isUndefined(result.structuredDetails);
+      expect(result).toEqual(exp);
+      expect(result.tags).not.toBeDefined();
+      expect(result.structuredDetails).not.toBeDefined();
 
       // with Tags
       result = parser._buildStatement(group, true);
-      assert.deepEqual(result.tags, group);
+      expect(result.tags).toEqual(group);
     });
 
     it('_buildStatement structured', () => {
       const parser = new Parser();
       const result = parser._buildStatement(DUMMY_GROUP_STRUCTURED);
-      assert.deepEqual(result.transactions[0].structuredDetails, {
+      expect(result.transactions[0].structuredDetails).toEqual({
         '20': 'Hello',
         '30': 'World',
       });
@@ -206,18 +205,18 @@ describe('Parser', () => {
 
     it('_validateGroup throws', () => {
       const parser = new Parser();
-      assert.throws(parser._validateGroup.bind(parser, [ // missing tags
+      expect(parser._validateGroup.bind(parser, [ // missing tags
         new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
-      ]), /Mandatory tag/);
-      assert.throws(parser._validateGroup.bind(parser, [ // missing tags
+      ])).toThrow(/Mandatory tag/);
+      expect(parser._validateGroup.bind(parser, [ // missing tags
         new Tags.TagClosingBalance('C140508EUR500,00')
-      ]), /Mandatory tag/);
-      assert.throws(parser._validateGroup.bind(parser, [ // missing tags
+      ])).toThrow(/Mandatory tag/);
+      expect(parser._validateGroup.bind(parser, [ // missing tags
         new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
         new Tags.TagOpeningBalance('C140507EUR0,00'),
         new Tags.TagClosingBalance('C140508EUR500,00')
-      ]), /Mandatory tag/);
-      assert.throws(parser._validateGroup.bind(parser, [ // inconsistent currency
+      ])).toThrow(/Mandatory tag/);
+      expect(parser._validateGroup.bind(parser, [ // inconsistent currency
         new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
         new Tags.TagAccountIdentification('123456789'),
         new Tags.TagStatementNumber('123/1'),
@@ -225,8 +224,8 @@ describe('Parser', () => {
         new Tags.TagStatementLine('1405070507C500,00NTRFNONREF//AUXREF'),
         new Tags.TagTransactionDetails('DETAILS'),
         new Tags.TagClosingBalance('C140508USD500,00')
-      ]), /Currency markers/);
-      assert.throws(parser._validateGroup.bind(parser, [ // inconsistent balances
+      ])).toThrow(/Currency markers/);
+      expect(parser._validateGroup.bind(parser, [ // inconsistent balances
         new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
         new Tags.TagAccountIdentification('123456789'),
         new Tags.TagStatementNumber('123/1'),
@@ -234,7 +233,7 @@ describe('Parser', () => {
         new Tags.TagStatementLine('1405070507C400,00NTRFNONREF//AUXREF'),
         new Tags.TagTransactionDetails('DETAILS'),
         new Tags.TagClosingBalance('C140508EUR500,00')
-      ]), /Sum of lines/);
+      ])).toThrow(/Sum of lines/);
     });
   });
 
@@ -242,7 +241,7 @@ describe('Parser', () => {
   describe('Middlewares', () => {
     it('post parse wrong fn throws', () => {
       const parser = new Parser();
-      assert.throws(() => parser.usePostParse(1), /middleware must be a function/);
+      expect(() => parser.usePostParse(1)).toThrow(/middleware must be a function/);
     });
     it('post parse middleware', () => {
       const parser = new Parser();
@@ -256,9 +255,9 @@ describe('Parser', () => {
       });
 
       const result = parser.parse(DUMMY_STATEMENT_LINES.join('\n'));
-      assert.isDefined(result);
-      assert.isTrue(result[0].dummyMarker);
-      assert.isTrue(result[0].dummyMarker2);
+      expect(result).toBeDefined();
+      expect(result[0].dummyMarker).toBe(true);
+      expect(result[0].dummyMarker2).toBe(true);
     });
   });
 
@@ -267,14 +266,14 @@ describe('Parser', () => {
     it('typical statement', () => {
       const parser = new Parser();
       const result = parser.parse(DUMMY_STATEMENT_LINES.join('\n'));
-      assert.equal(result.length, 1);
-      assert.deepEqual(result[0], expectedStatement());
+      expect(result.length).toEqual(1);
+      expect(result[0]).toEqual(expectedStatement());
     });
 
     it('statement with structured 86', () => {
       let parser = new Parser();
       let result = parser.parse(DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n'));
-      assert.equal(result.length, 1);
+      expect(result.length).toEqual(1);
 
       const exp = expectedStatement();
       exp.transactions[0].details = '?20some?21data';
@@ -282,12 +281,12 @@ describe('Parser', () => {
         '20': 'some',
         '21': 'data',
       };
-      assert.deepEqual(result[0], exp);
+      expect(result[0]).toEqual(exp);
 
       parser = new Parser({ no86Structure: true });
       result = parser.parse(DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n'));
       delete exp.transactions[0].structuredDetails;
-      assert.deepEqual(result[0], exp);
+      expect(result[0]).toEqual(exp);
     });
 
     it('statement with fields 64, 65, long 61 and statement comment', () => {
@@ -303,8 +302,8 @@ describe('Parser', () => {
       exp.informationToAccountOwner = 'statement\ncomment';
 
       const result = parser.parse(DUMMY_STATEMENT_LINES_61_64_65.join('\n'));
-      assert.equal(result.length, 1);
-      assert.deepEqual(result[0], exp);
+      expect(result.length).toEqual(1);
+      expect(result[0]).toEqual(exp);
     });
 
     it('multiple statements with message blocks', () => {
@@ -328,9 +327,9 @@ describe('Parser', () => {
       exp2.transactions       = [];
 
       const result = parser.parse(DUMMY_STATEMENT_W_MESSAGE_BLOCKS.join('\n'));
-      assert.equal(result.length, 2);
-      assert.deepEqual(result[0], exp1);
-      assert.deepEqual(result[1], exp2);
+      expect(result.length).toEqual(2);
+      expect(result[0]).toEqual(exp1);
+      expect(result[1]).toEqual(exp2);
     });
   });
 
@@ -358,7 +357,7 @@ describe('Parser', () => {
     it('_parseLines with NS', () => {
       const parser = new Parser();
       const result = [...parser._parseLines(DUMMY_STATEMENT_LINES_WITH_NS)];
-      assert.deepEqual(result, [
+      expect(result).toEqual([
         {id: '20', subId: '',  data: ['B4E08MS9D00A0009']},
         {id: '21', subId: '',  data: ['X']},
         {id: '25', subId: '',  data: ['123456789']},
@@ -379,8 +378,8 @@ describe('Parser', () => {
     it('statement with NS', () => {
       const parser = new Parser();
       const result = parser.parse(DUMMY_STATEMENT_LINES_WITH_NS.join('\n'));
-      assert.equal(result.length, 1);
-      assert.deepEqual(result[0], {
+      expect(result.length).toEqual(1);
+      expect(result[0]).toEqual({
         transactionReference:  'B4E08MS9D00A0009',
         relatedReference:      'X',
         accountIdentification: '123456789',

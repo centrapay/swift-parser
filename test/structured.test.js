@@ -1,4 +1,3 @@
-const assert = require('chai').assert;
 const Field86Parser = require('../lib/field86structure');
 
 function run(details) {
@@ -7,23 +6,23 @@ function run(details) {
 
 describe('Field86Structure', () => {
   it('Detects no structure', () => {
-    assert.isUndefined(run('some arbitrary text'));
-    assert.isUndefined(run('>some arbitrary text'));
-    assert.isUndefined(run('?some arbitrary text'));
-    assert.isUndefined(run('so?20me arbitrary text'));
-    assert.isUndefined(run('/some arbitrary text'));
-    assert.isUndefined(run('/some/ arbitrary text')); // lower case
-    assert.isUndefined(run('some /ATTR/ arbitrary text'));
-    assert.isUndefined(run('')); // empty string
+    expect(run('some arbitrary text')).not.toBeDefined();
+    expect(run('>some arbitrary text')).not.toBeDefined();
+    expect(run('?some arbitrary text')).not.toBeDefined();
+    expect(run('so?20me arbitrary text')).not.toBeDefined();
+    expect(run('/some arbitrary text')).not.toBeDefined();
+    expect(run('/some/ arbitrary text')).not.toBeDefined(); // lower case
+    expect(run('some /ATTR/ arbitrary text')).not.toBeDefined();
+    expect(run('')).not.toBeDefined(); // empty string
   });
 
   it('Detects > structure', () => {
-    assert.deepEqual(run('>20Details 123>30123232421>31'), {
+    expect(run('>20Details 123>30123232421>31')).toEqual({
       '20': 'Details 123',
       '30': '123232421',
       '31': ''
     });
-    assert.deepEqual(run('>20Details 123\n>30123232421>31'), {
+    expect(run('>20Details 123\n>30123232421>31')).toEqual({
       '20': 'Details 123',
       '30': '123232421',
       '31': ''
@@ -31,7 +30,7 @@ describe('Field86Structure', () => {
   });
 
   it('Detects structure, with beginning spaces', () => {
-    assert.deepEqual(run(' >20Details 123>30123232421>31'), {
+    expect(run(' >20Details 123>30123232421>31')).toEqual({
       '20': 'Details 123',
       '30': '123232421',
       '31': ''
@@ -39,12 +38,12 @@ describe('Field86Structure', () => {
   });
 
   it('Detects ? structure', () => {
-    assert.deepEqual(run('?20Details 123?30123232421?31'), {
+    expect(run('?20Details 123?30123232421?31')).toEqual({
       '20': 'Details 123',
       '30': '123232421',
       '31': ''
     });
-    assert.deepEqual(run('?20Details? 123?30123232421?31'), {
+    expect(run('?20Details? 123?30123232421?31')).toEqual({
       '20': 'Details? 123',
       '30': '123232421',
       '31': ''
@@ -52,7 +51,7 @@ describe('Field86Structure', () => {
   });
 
   it('Detects /XXX/ structure', () => {
-    assert.deepEqual(run('/ATR/Details 123/ATR2/123232421/ATR3/'), {
+    expect(run('/ATR/Details 123/ATR2/123232421/ATR3/')).toEqual({
       'ATR':  'Details 123',
       'ATR2': '123232421',
       'ATR3': ''
@@ -71,7 +70,7 @@ describe('Field86Structure', () => {
 
     const parsed = run(tag);
 
-    assert.deepEqual(parsed, {
+    expect(parsed).toEqual({
       'XXXX': '/100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL) ',
       'ORDP': 'XX XXXXXX XXXXX XXXX N.A.25 XXXX XXXXX, CANARY WHARF ',
       'REMI': 'UBERWEISUNG OUR REF: 03MT181024144353YOUR REF: P6363103 240 1   M CA O/XXXXGB2L',
