@@ -1,6 +1,9 @@
 const Parser  = require('../lib/parser');
 const Tags    = require('../lib/tags');
 const helpers = require('../lib/helperModels');
+const path = require('path');
+const fs = require('fs');
+const glob = require('glob');
 
 const DUMMY_STATEMENT_LINES = [
   ':20:B4E08MS9D00A0009',
@@ -137,6 +140,20 @@ const DUMMY_GROUP_COMPLEX = [ // 2 detail lines and 2 transactions
 ///////////////////////////////////////////////////////////////////////////////
 
 describe('Parser', () => {
+
+  describe('Full Examples', () => {
+
+    glob.sync('*.{mt940,mt940x}', { cwd: __dirname }).forEach(examplePath => {
+      const example = fs.readFileSync(path.resolve(__dirname, examplePath), 'utf-8');
+      it(examplePath, () => {
+        const parser = new Parser();
+        const result = parser.parse(example);
+        expect(result).toMatchSnapshot();
+      });
+    });
+
+  });
+
   describe('Parser methods', () => {
 
     it('_splitAndNormalize', () => {
