@@ -1,7 +1,7 @@
 {
-  "name": "mt940js",
-  "version": "1.3.5",
-  "description": "javascript mt940 bank statement parser",
+  "name": "@centrapay/swift-parser",
+  "version": "0.1.0",
+  "description": "Swift financial message parser (MT940)",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -20,8 +20,8 @@
   ],
   "author": "Alexander Tsybulsky",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/a-fas/mt940js.git",
-  "repository": "https://github.com/a-fas/mt940js.git",
+  "homepage": "https://github.com/centrapay/swift-parser",
+  "repository": "https://github.com/centrapay/swift-parser.git",
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^7.3.0",
