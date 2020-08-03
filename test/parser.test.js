@@ -164,7 +164,7 @@ describe('Parser', () => {
       const example = fs.readFileSync(path.resolve(__dirname, examplePath), 'utf-8');
       it(examplePath, () => {
         const parser = new Parser();
-        const result = parser.parse(example);
+        const result = parser.parse({ data: example });
         expect(result).toMatchSnapshot();
       });
     });
@@ -203,7 +203,7 @@ describe('Parser', () => {
     it('_buildStatement', () => {
       const parser = new Parser();
       const group  = DUMMY_GROUP_COMPLEX;
-      let result   = parser._buildStatement(group);
+      let result   = parser._buildStatement({ group });
 
       let exp  = expectedStatement();
       exp.transactions.push({ // patch
@@ -224,13 +224,13 @@ describe('Parser', () => {
       expect(result.structuredDetails).not.toBeDefined();
 
       // with Tags
-      result = parser._buildStatement(group, true);
+      result = parser._buildStatement({ group, withTags: true });
       expect(result.tags).toEqual(group);
     });
 
     it('_buildStatement structured', () => {
       const parser = new Parser();
-      const result = parser._buildStatement(DUMMY_GROUP_STRUCTURED);
+      const result = parser._buildStatement({ group: DUMMY_GROUP_STRUCTURED, with86Structure: true });
       expect(result.transactions[0].structuredDetails).toEqual({
         '20': 'Hello',
         '30': 'World',
@@ -288,7 +288,7 @@ describe('Parser', () => {
         next();
       });
 
-      const result = parser.parse(DUMMY_STATEMENT_LINES.join('\n'));
+      const result = parser.parse({ data: DUMMY_STATEMENT_LINES.join('\n') });
       expect(result).toBeDefined();
       expect(result[0].dummyMarker).toBe(true);
       expect(result[0].dummyMarker2).toBe(true);
@@ -299,14 +299,14 @@ describe('Parser', () => {
   describe('Integration test', () => {
     it('typical statement', () => {
       const parser = new Parser();
-      const result = parser.parse(DUMMY_STATEMENT_LINES.join('\n'));
+      const result = parser.parse({ data: DUMMY_STATEMENT_LINES.join('\n') });
       expect(result.length).toEqual(1);
       expect(result[0]).toEqual(expectedStatement());
     });
 
     it('statement with structured 86', () => {
       let parser = new Parser();
-      let result = parser.parse(DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n'));
+      let result = parser.parse({ data: DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n') });
       expect(result.length).toEqual(1);
 
       const exp = expectedStatement();
@@ -317,8 +317,8 @@ describe('Parser', () => {
       };
       expect(result[0]).toEqual(exp);
 
-      parser = new Parser({ no86Structure: true });
-      result = parser.parse(DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n'));
+      parser = new Parser();
+      result = parser.parse({ with86Structure: false, data: DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n') });
       delete exp.transactions[0].structuredDetails;
       expect(result[0]).toEqual(exp);
     });
@@ -335,7 +335,7 @@ describe('Parser', () => {
       exp.transactions[0].extraDetails = 'SUPPLEMENTARY61';
       exp.informationToAccountOwner = 'statement\ncomment';
 
-      const result = parser.parse(DUMMY_STATEMENT_LINES_61_64_65.join('\n'));
+      const result = parser.parse({ data: DUMMY_STATEMENT_LINES_61_64_65.join('\n') });
       expect(result.length).toEqual(1);
       expect(result[0]).toEqual(exp);
     });
@@ -360,7 +360,7 @@ describe('Parser', () => {
       exp2.number.sequence    = '2';
       exp2.transactions       = [];
 
-      const result = parser.parse(DUMMY_STATEMENT_W_MESSAGE_BLOCKS.join('\n'));
+      const result = parser.parse({ data: DUMMY_STATEMENT_W_MESSAGE_BLOCKS.join('\n') });
       expect(result.length).toEqual(2);
       expect(result[0]).toEqual(exp1);
       expect(result[1]).toEqual(exp2);
@@ -411,7 +411,7 @@ describe('Parser', () => {
 
     it('statement with NS', () => {
       const parser = new Parser();
-      const result = parser.parse(DUMMY_STATEMENT_LINES_WITH_NS.join('\n'));
+      const result = parser.parse({ data: DUMMY_STATEMENT_LINES_WITH_NS.join('\n') });
       expect(result.length).toEqual(1);
       expect(result[0]).toEqual({
         transactionReference:  'B4E08MS9D00A0009',
