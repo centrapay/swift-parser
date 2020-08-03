@@ -298,162 +298,139 @@ REK: NL84INGB0234561789/NAAM: MMS ONLINE NEDERLAND B.V.",
 ]
 `;
 
-exports[`Parser Full Examples test2.mt940x statements 1`] = `
+exports[`Parser Full Examples test1.mt942 1`] = `
 Array [
   Statement {
-    "accountIdentification": "B4E08MS9D00A0009",
-    "closingAvailableBalance": 2996.53,
-    "closingAvailableBalanceDate": 2017-01-24T00:00:00.000Z,
-    "closingBalance": 2996.53,
-    "closingBalanceDate": 2017-01-24T00:00:00.000Z,
-    "currency": "PLN",
-    "forwardAvailableBalance": 2996.53,
-    "forwardAvailableBalanceDate": 2017-01-24T00:00:00.000Z,
+    "accountIdentification": "123011050612305",
+    "creditFloorLimit": Object {
+      "amount": "0",
+      "currency": "NZD",
+    },
+    "dateTimeIndication": 2020-05-20T22:17:00.000Z,
+    "debitFloorLimit": Object {
+      "amount": "0",
+      "currency": "NZD",
+    },
     "informationToAccountOwner": "",
-    "messageBlocks": Object {},
     "number": Object {
       "section": "",
       "sequence": "1",
-      "statement": "17001",
+      "statement": "17",
     },
-    "openingBalance": 3503.6,
-    "openingBalanceDate": 2017-01-01T00:00:00.000Z,
     "relatedReference": undefined,
-    "statementDate": 2017-01-24T00:00:00.000Z,
-    "transactionReference": "17013109020",
+    "transactionReference": "FNB5014200017001",
     "transactions": Array [
       Transaction {
-        "amount": -369,
+        "amount": -5000,
         "bankReference": "",
-        "currency": "PLN",
-        "date": 2017-01-03T00:00:00.000Z,
+        "currency": undefined,
+        "date": 2020-05-21T00:00:00.000Z,
         "detailSegments": Array [
-          ">20Usługi księgowe - m-c grudzien 2016 rok.>31491050195310000
-0477656534>32BOOKING GROUP",
+          "/BAI/469/MISCELLANEOUS ACH DEBIT
+/BENM/Transfer",
         ],
-        "entryDate": "",
-        "extraDetails": "",
-        "fundsCode": "N",
+        "entryDate": 2020-05-21T00:00:00.000Z,
+        "extraDetails": "Transfer",
+        "fundsCode": "",
         "isReversal": false,
         "reference": "NONREF",
-        "transactionType": "FCHG",
+        "transactionType": "NTRF",
       },
       Transaction {
-        "amount": -15.07,
+        "amount": 5000,
         "bankReference": "",
-        "currency": "PLN",
-        "date": 2017-01-04T00:00:00.000Z,
+        "currency": undefined,
+        "date": 2020-05-21T00:00:00.000Z,
         "detailSegments": Array [
-          ">20VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=
-4.5385 PLN GOOGLE *SVCSAPPS@google.com>31>32",
+          "/BAI/399/MISCELLANEOUS CREDIT
+/ORDP/test rate
+/ACNO/12-3011-0334122-37",
         ],
-        "entryDate": "",
-        "extraDetails": "",
-        "fundsCode": "N",
+        "entryDate": 2020-05-21T00:00:00.000Z,
+        "extraDetails": "test rate/NBKT",
+        "fundsCode": "",
         "isReversal": false,
         "reference": "NONREF",
-        "transactionType": "FCHG",
-      },
-      Transaction {
-        "amount": -123,
-        "bankReference": "",
-        "currency": "PLN",
-        "date": 2017-01-10T00:00:00.000Z,
-        "detailSegments": Array [
-          ">20usługa biurowa 2017/01>315910902053000000
-016768736>32OFFICE GROUP
-UL. SPOKOJNA 3",
-        ],
-        "entryDate": "",
-        "extraDetails": "",
-        "fundsCode": "N",
-        "isReversal": false,
-        "reference": "NONREF",
-        "transactionType": "FCHG",
-      },
-    ],
-  },
-  Statement {
-    "accountIdentification": "B4E08MS9D00A0009",
-    "closingAvailableBalance": 2971.53,
-    "closingAvailableBalanceDate": 2017-01-31T00:00:00.000Z,
-    "closingBalance": 2971.53,
-    "closingBalanceDate": 2017-01-31T00:00:00.000Z,
-    "currency": "PLN",
-    "forwardAvailableBalance": 2971.53,
-    "forwardAvailableBalanceDate": 2017-01-31T00:00:00.000Z,
-    "informationToAccountOwner": "",
-    "messageBlocks": Object {},
-    "number": Object {
-      "section": "",
-      "sequence": "2",
-      "statement": "17001",
-    },
-    "openingBalance": 2996.53,
-    "openingBalanceDate": 2017-01-24T00:00:00.000Z,
-    "relatedReference": undefined,
-    "statementDate": 2017-01-31T00:00:00.000Z,
-    "transactionReference": "17013109020",
-    "transactions": Array [
-      Transaction {
-        "amount": -25,
-        "bankReference": "",
-        "currency": "PLN",
-        "date": 2017-01-31T00:00:00.000Z,
-        "detailSegments": Array [
-          ">20Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017
->31>32",
-        ],
-        "entryDate": "",
-        "extraDetails": "",
-        "fundsCode": "N",
-        "isReversal": false,
-        "reference": "NONREF",
-        "transactionType": "FCHG",
+        "transactionType": "NBKT",
       },
     ],
   },
 ]
 `;
 
-exports[`Parser Full Examples test2.mt940x transaction computed state 1`] = `
+exports[`Parser Full Examples test2.mt942 1`] = `
 Array [
-  Object {
-    "details": ">20Usługi księgowe - m-c grudzien 2016 rok.>31491050195310000
-0477656534>32BOOKING GROUP",
-    "structuredDetails": Object {
-      "20": "Usługi księgowe - m-c grudzien 2016 rok.",
-      "31": "4910501953100000477656534",
-      "32": "BOOKING GROUP",
+  Statement {
+    "accountIdentification": "123011050612305",
+    "creditFloorLimit": Object {
+      "amount": "0",
+      "currency": "NZD",
     },
-  },
-  Object {
-    "details": ">20VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=
-4.5385 PLN GOOGLE *SVCSAPPS@google.com>31>32",
-    "structuredDetails": Object {
-      "20": "VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=4.5385 PLN GOOGLE *SVCSAPPS@google.com",
-      "31": "",
-      "32": "",
+    "dateTimeIndication": 2020-05-21T01:16:00.000Z,
+    "debitFloorLimit": Object {
+      "amount": "0",
+      "currency": "NZD",
     },
-  },
-  Object {
-    "details": ">20usługa biurowa 2017/01>315910902053000000
-016768736>32OFFICE GROUP
-UL. SPOKOJNA 3",
-    "structuredDetails": Object {
-      "20": "usługa biurowa 2017/01",
-      "31": "5910902053000000016768736",
-      "32": "OFFICE GROUPUL. SPOKOJNA 3",
+    "informationToAccountOwner": "",
+    "number": Object {
+      "section": "",
+      "sequence": "1",
+      "statement": "18",
     },
-  },
-  Object {
-    "details": ">20Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017
->31>32",
-    "structuredDetails": Object {
-      "20": "Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017",
-      "31": "",
-      "32": "",
-    },
+    "relatedReference": "GNHD99KKSLL99001",
+    "transactionReference": "FNB5014200018001",
+    "transactions": Array [
+      Transaction {
+        "amount": -5000,
+        "bankReference": "",
+        "currency": undefined,
+        "date": 2020-05-21T00:00:00.000Z,
+        "detailSegments": Array [
+          "/BAI/469/MISCELLANEOUS ACH DEBIT
+/BENM/Transfer",
+        ],
+        "entryDate": 2020-05-21T00:00:00.000Z,
+        "extraDetails": "Transfer",
+        "fundsCode": "",
+        "isReversal": false,
+        "reference": "NONREF",
+        "transactionType": "NTRF",
+      },
+      Transaction {
+        "amount": -20,
+        "bankReference": "",
+        "currency": undefined,
+        "date": 2020-05-21T00:00:00.000Z,
+        "detailSegments": Array [
+          "/BAI/469/MISCELLANEOUS ACH DEBIT
+/BENM/Transfer
+/ACNO/012-3011-00334130-0037",
+        ],
+        "entryDate": 2020-05-21T00:00:00.000Z,
+        "extraDetails": "Transfer",
+        "fundsCode": "",
+        "isReversal": false,
+        "reference": "NONREF",
+        "transactionType": "NTRF",
+      },
+      Transaction {
+        "amount": 5020,
+        "bankReference": "",
+        "currency": undefined,
+        "date": 2020-05-21T00:00:00.000Z,
+        "detailSegments": Array [
+          "/BAI/399/MISCELLANEOUS CREDIT
+/ORDP/wording
+/ACNO/12-3011-0334130-37",
+        ],
+        "entryDate": 2020-05-21T00:00:00.000Z,
+        "extraDetails": "wording/NBKT",
+        "fundsCode": "",
+        "isReversal": false,
+        "reference": "NONREF",
+        "transactionType": "NBKT",
+      },
+    ],
   },
 ]
 `;

@@ -84,7 +84,7 @@ const DUMMY_STATEMENT_W_MESSAGE_BLOCKS = [
   '-}{5:{CAC:VALIDATION SUCCESS}}'
 ];
 
-function expectedStatement() {
+function expectedMt940Statement() {
   return {
     transactionReference:  'B4E08MS9D00A0009',
     relatedReference:      'X',
@@ -176,6 +176,14 @@ describe('Parser', () => {
 
     });
 
+    glob.sync('*.mt942', { cwd: __dirname }).forEach(examplePath => {
+      const example = fs.readFileSync(path.resolve(__dirname, examplePath), 'utf-8');
+      it(examplePath, () => {
+        const parser = new Parser();
+        const result = parser.parse({ data: example, type: 'mt942' });
+        expect(result).toMatchSnapshot();
+      });
+    });
   });
 
   describe('Parser methods', () => {
@@ -215,7 +223,7 @@ describe('Parser', () => {
       const parser = new Parser();
       const result = parser.parse({ data: DUMMY_STATEMENT_LINES.join('\n') });
       expect(result.length).toEqual(1);
-      expect(result[0]).toEqual(expectedStatement());
+      expect(result[0]).toEqual(expectedMt940Statement());
     });
 
     it('statement with structured 86', () => {
@@ -223,7 +231,7 @@ describe('Parser', () => {
       let result = parser.parse({ data: DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n') });
       expect(result.length).toEqual(1);
 
-      const exp = expectedStatement();
+      const exp = expectedMt940Statement();
       exp.transactions[0].detailSegments = [ '?20some?21data' ];
       expect(result[0].transactions[0].details).toEqual('?20some?21data');
       expect(result[0].transactions[0].structuredDetails).toEqual({
@@ -240,7 +248,7 @@ describe('Parser', () => {
 
     it('statement with fields 64, 65, long 61 and statement comment', () => {
       const parser = new Parser();
-      const exp    = expectedStatement();
+      const exp    = expectedMt940Statement();
 
       // patch data
       exp.closingAvailableBalanceDate = helpers.Date.parse('14', '05', '09');
@@ -257,8 +265,8 @@ describe('Parser', () => {
 
     it('multiple statements with message blocks', () => {
       const parser = new Parser();
-      const exp1   = expectedStatement();
-      const exp2   = expectedStatement();
+      const exp1   = expectedMt940Statement();
+      const exp2   = expectedMt940Statement();
 
       // patch data
       exp1.messageBlocks      = {
