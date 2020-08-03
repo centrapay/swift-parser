@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Parser Full Examples test-with-NS.mt940x 1`] = `
+exports[`Parser Full Examples test-with-NS.mt940x statements 1`] = `
 Array [
   Statement {
     "accountIdentification": "B4E08MS9D00A0009",
@@ -24,62 +24,53 @@ Array [
     "statementDate": 2017-01-24T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
-      Object {
+      Transaction {
         "amount": -369,
         "bankReference": "",
         "currency": "PLN",
         "date": 2017-01-03T00:00:00.000Z,
-        "details": ">20Usługi księgowe - m-c grudzien 2016 rok.>31491050195310000
+        "detailSegments": Array [
+          ">20Usługi księgowe - m-c grudzien 2016 rok.>31491050195310000
 0477656534>32BOOKING GROUP",
+        ],
         "entryDate": "",
         "extraDetails": "",
         "fundsCode": "N",
         "isReversal": false,
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "20": "Usługi księgowe - m-c grudzien 2016 rok.",
-          "31": "4910501953100000477656534",
-          "32": "BOOKING GROUP",
-        },
         "transactionType": "FCHG",
       },
-      Object {
+      Transaction {
         "amount": -15.07,
         "bankReference": "",
         "currency": "PLN",
         "date": 2017-01-04T00:00:00.000Z,
-        "details": ">20VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=
+        "detailSegments": Array [
+          ">20VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=
 4.5385 PLN GOOGLE *SVCSAPPS@google.com>31>32",
+        ],
         "entryDate": "",
         "extraDetails": "",
         "fundsCode": "N",
         "isReversal": false,
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "20": "VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=4.5385 PLN GOOGLE *SVCSAPPS@google.com",
-          "31": "",
-          "32": "",
-        },
         "transactionType": "FCHG",
       },
-      Object {
+      Transaction {
         "amount": -123,
         "bankReference": "",
         "currency": "PLN",
         "date": 2017-01-10T00:00:00.000Z,
-        "details": ">20usługa biurowa 2017/01>315910902053000000
+        "detailSegments": Array [
+          ">20usługa biurowa 2017/01>315910902053000000
 016768736>32OFFICE GROUP
 UL. SPOKOJNA 3",
+        ],
         "entryDate": "",
         "extraDetails": "",
         "fundsCode": "N",
         "isReversal": false,
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "20": "usługa biurowa 2017/01",
-          "31": "5910902053000000016768736",
-          "32": "OFFICE GROUPUL. SPOKOJNA 3",
-        },
         "transactionType": "FCHG",
       },
     ],
@@ -106,13 +97,15 @@ UL. SPOKOJNA 3",
     "statementDate": 2017-01-31T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
-      Object {
+      Transaction {
         "amount": -25,
         "bankReference": "",
         "currency": "PLN",
         "date": 2017-01-31T00:00:00.000Z,
-        "details": ">20Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017
+        "detailSegments": Array [
+          ">20Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017
 >31>32",
+        ],
         "entryDate": "",
         "extraDetails": "",
         "fundsCode": "N",
@@ -121,11 +114,6 @@ UL. SPOKOJNA 3",
 02City and Region
 03Invoice Nr. 12345",
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "20": "Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017",
-          "31": "",
-          "32": "",
-        },
         "transactionType": "FCHG",
       },
     ],
@@ -133,7 +121,49 @@ UL. SPOKOJNA 3",
 ]
 `;
 
-exports[`Parser Full Examples test1.mt940 1`] = `
+exports[`Parser Full Examples test-with-NS.mt940x transaction computed state 1`] = `
+Array [
+  Object {
+    "details": ">20Usługi księgowe - m-c grudzien 2016 rok.>31491050195310000
+0477656534>32BOOKING GROUP",
+    "structuredDetails": Object {
+      "20": "Usługi księgowe - m-c grudzien 2016 rok.",
+      "31": "4910501953100000477656534",
+      "32": "BOOKING GROUP",
+    },
+  },
+  Object {
+    "details": ">20VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=
+4.5385 PLN GOOGLE *SVCSAPPS@google.com>31>32",
+    "structuredDetails": Object {
+      "20": "VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=4.5385 PLN GOOGLE *SVCSAPPS@google.com",
+      "31": "",
+      "32": "",
+    },
+  },
+  Object {
+    "details": ">20usługa biurowa 2017/01>315910902053000000
+016768736>32OFFICE GROUP
+UL. SPOKOJNA 3",
+    "structuredDetails": Object {
+      "20": "usługa biurowa 2017/01",
+      "31": "5910902053000000016768736",
+      "32": "OFFICE GROUPUL. SPOKOJNA 3",
+    },
+  },
+  Object {
+    "details": ">20Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017
+>31>32",
+    "structuredDetails": Object {
+      "20": "Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017",
+      "31": "",
+      "32": "",
+    },
+  },
+]
+`;
+
+exports[`Parser Full Examples test1.mt940 statements 1`] = `
 Array [
   Statement {
     "accountIdentification": "123456789",
@@ -164,13 +194,15 @@ Array [
     "statementDate": 2014-05-08T00:00:00.000Z,
     "transactionReference": "B4E08MS9D00A0009",
     "transactions": Array [
-      Object {
+      Transaction {
         "amount": 500,
         "bankReference": "B4E07XM00J000023",
         "currency": "EUR",
         "date": 2014-05-07T00:00:00.000Z,
-        "details": "HIER EEN MOOIE OMSCHRIJVING IN HOOFDLETTERS
+        "detailSegments": Array [
+          "HIER EEN MOOIE OMSCHRIJVING IN HOOFDLETTERS
 WANT DAT IS ZOALS DE NEDERLANDSE BANKEN COMMUNICEREN",
+        ],
         "entryDate": 2014-05-07T00:00:00.000Z,
         "extraDetails": "",
         "fundsCode": "",
@@ -209,13 +241,15 @@ WANT DAT IS ZOALS DE NEDERLANDSE BANKEN COMMUNICEREN",
     "statementDate": 2014-07-30T00:00:00.000Z,
     "transactionReference": "B4G30MS9D00A003D",
     "transactions": Array [
-      Object {
+      Transaction {
         "amount": -2760,
         "bankReference": "B4G29PGCVO7Q06US",
         "currency": "EUR",
         "date": 2014-07-29T00:00:00.000Z,
-        "details": "FACTUUR 201403110, 201403113
+        "detailSegments": Array [
+          "FACTUUR 201403110, 201403113
 REK: NL65INGB0123456789/NAAM: PICQER",
+        ],
         "entryDate": 2014-07-29T00:00:00.000Z,
         "extraDetails": "/OCMT/EUR10,00/",
         "fundsCode": "",
@@ -223,13 +257,15 @@ REK: NL65INGB0123456789/NAAM: PICQER",
         "reference": "NONREF",
         "transactionType": "NTRF",
       },
-      Object {
+      Transaction {
         "amount": 500,
         "bankReference": "B4G29PGDCK1QFV3E",
         "currency": "EUR",
         "date": 2014-07-29T00:00:00.000Z,
-        "details": "12160475 0050001631430920 ORDERID: 264267 MEDIA MARKT ONLINE NE
+        "detailSegments": Array [
+          "12160475 0050001631430920 ORDERID: 264267 MEDIA MARKT ONLINE NE
 REK: NL84INGB0234561789/NAAM: MMS ONLINE NEDERLAND B.V.",
+        ],
         "entryDate": 2014-07-29T00:00:00.000Z,
         "extraDetails": "",
         "fundsCode": "",
@@ -242,7 +278,27 @@ REK: NL84INGB0234561789/NAAM: MMS ONLINE NEDERLAND B.V.",
 ]
 `;
 
-exports[`Parser Full Examples test2.mt940x 1`] = `
+exports[`Parser Full Examples test1.mt940 transaction computed state 1`] = `
+Array [
+  Object {
+    "details": "HIER EEN MOOIE OMSCHRIJVING IN HOOFDLETTERS
+WANT DAT IS ZOALS DE NEDERLANDSE BANKEN COMMUNICEREN",
+    "structuredDetails": undefined,
+  },
+  Object {
+    "details": "FACTUUR 201403110, 201403113
+REK: NL65INGB0123456789/NAAM: PICQER",
+    "structuredDetails": undefined,
+  },
+  Object {
+    "details": "12160475 0050001631430920 ORDERID: 264267 MEDIA MARKT ONLINE NE
+REK: NL84INGB0234561789/NAAM: MMS ONLINE NEDERLAND B.V.",
+    "structuredDetails": undefined,
+  },
+]
+`;
+
+exports[`Parser Full Examples test2.mt940x statements 1`] = `
 Array [
   Statement {
     "accountIdentification": "B4E08MS9D00A0009",
@@ -266,62 +322,53 @@ Array [
     "statementDate": 2017-01-24T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
-      Object {
+      Transaction {
         "amount": -369,
         "bankReference": "",
         "currency": "PLN",
         "date": 2017-01-03T00:00:00.000Z,
-        "details": ">20Usługi księgowe - m-c grudzien 2016 rok.>31491050195310000
+        "detailSegments": Array [
+          ">20Usługi księgowe - m-c grudzien 2016 rok.>31491050195310000
 0477656534>32BOOKING GROUP",
+        ],
         "entryDate": "",
         "extraDetails": "",
         "fundsCode": "N",
         "isReversal": false,
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "20": "Usługi księgowe - m-c grudzien 2016 rok.",
-          "31": "4910501953100000477656534",
-          "32": "BOOKING GROUP",
-        },
         "transactionType": "FCHG",
       },
-      Object {
+      Transaction {
         "amount": -15.07,
         "bankReference": "",
         "currency": "PLN",
         "date": 2017-01-04T00:00:00.000Z,
-        "details": ">20VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=
+        "detailSegments": Array [
+          ">20VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=
 4.5385 PLN GOOGLE *SVCSAPPS@google.com>31>32",
+        ],
         "entryDate": "",
         "extraDetails": "",
         "fundsCode": "N",
         "isReversal": false,
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "20": "VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=4.5385 PLN GOOGLE *SVCSAPPS@google.com",
-          "31": "",
-          "32": "",
-        },
         "transactionType": "FCHG",
       },
-      Object {
+      Transaction {
         "amount": -123,
         "bankReference": "",
         "currency": "PLN",
         "date": 2017-01-10T00:00:00.000Z,
-        "details": ">20usługa biurowa 2017/01>315910902053000000
+        "detailSegments": Array [
+          ">20usługa biurowa 2017/01>315910902053000000
 016768736>32OFFICE GROUP
 UL. SPOKOJNA 3",
+        ],
         "entryDate": "",
         "extraDetails": "",
         "fundsCode": "N",
         "isReversal": false,
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "20": "usługa biurowa 2017/01",
-          "31": "5910902053000000016768736",
-          "32": "OFFICE GROUPUL. SPOKOJNA 3",
-        },
         "transactionType": "FCHG",
       },
     ],
@@ -348,23 +395,20 @@ UL. SPOKOJNA 3",
     "statementDate": 2017-01-31T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
-      Object {
+      Transaction {
         "amount": -25,
         "bankReference": "",
         "currency": "PLN",
         "date": 2017-01-31T00:00:00.000Z,
-        "details": ">20Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017
+        "detailSegments": Array [
+          ">20Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017
 >31>32",
+        ],
         "entryDate": "",
         "extraDetails": "",
         "fundsCode": "N",
         "isReversal": false,
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "20": "Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017",
-          "31": "",
-          "32": "",
-        },
         "transactionType": "FCHG",
       },
     ],
@@ -372,7 +416,49 @@ UL. SPOKOJNA 3",
 ]
 `;
 
-exports[`Parser Full Examples testX.mt940 1`] = `
+exports[`Parser Full Examples test2.mt940x transaction computed state 1`] = `
+Array [
+  Object {
+    "details": ">20Usługi księgowe - m-c grudzien 2016 rok.>31491050195310000
+0477656534>32BOOKING GROUP",
+    "structuredDetails": Object {
+      "20": "Usługi księgowe - m-c grudzien 2016 rok.",
+      "31": "4910501953100000477656534",
+      "32": "BOOKING GROUP",
+    },
+  },
+  Object {
+    "details": ">20VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=
+4.5385 PLN GOOGLE *SVCSAPPS@google.com>31>32",
+    "structuredDetails": Object {
+      "20": "VB ELECTR. PŁATNOŚĆ KARTĄ 3.32 EUR 1 EUR=4.5385 PLN GOOGLE *SVCSAPPS@google.com",
+      "31": "",
+      "32": "",
+    },
+  },
+  Object {
+    "details": ">20usługa biurowa 2017/01>315910902053000000
+016768736>32OFFICE GROUP
+UL. SPOKOJNA 3",
+    "structuredDetails": Object {
+      "20": "usługa biurowa 2017/01",
+      "31": "5910902053000000016768736",
+      "32": "OFFICE GROUPUL. SPOKOJNA 3",
+    },
+  },
+  Object {
+    "details": ">20Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017
+>31>32",
+    "structuredDetails": Object {
+      "20": "Opłata za prowadzenie rachunku od  1-01-2017 do 31-01-2017",
+      "31": "",
+      "32": "",
+    },
+  },
+]
+`;
+
+exports[`Parser Full Examples testX.mt940 statements 1`] = `
 Array [
   Statement {
     "accountIdentification": "123456789",
@@ -406,26 +492,23 @@ Array [
     "statementDate": 2014-05-08T00:00:00.000Z,
     "transactionReference": "B4E08MS9D00A0009",
     "transactions": Array [
-      Object {
+      Transaction {
         "amount": 500,
         "bankReference": "B4E07XM00J000023",
         "currency": "EUR",
         "date": 2014-05-07T00:00:00.000Z,
-        "details": " /XXXX//100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL)
+        "detailSegments": Array [
+          " /XXXX//100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL)
  /ORDP/XXXXXXXXXXXXX XXXXXXXX BANKEN AB (PUBL) (FORMER: SXB A
  /REMI/XXXXXXXXXXX OUR REF: 03MT181012182288
 YOUR REF: 181012671        M CA O/XXXXDK22
 BIC:XXXXDK22",
+        ],
         "entryDate": 2014-05-07T00:00:00.000Z,
         "extraDetails": "",
         "fundsCode": "",
         "isReversal": false,
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "ORDP": "XXXXXXXXXXXXX XXXXXXXX BANKEN AB (PUBL) (FORMER: SXB A ",
-          "REMI": "XXXXXXXXXXX OUR REF: 03MT181012182288YOUR REF: 181012671        M CA O/XXXXDK22BIC:XXXXDK22",
-          "XXXX": "/100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL) ",
-        },
         "transactionType": "NTRF",
       },
     ],
@@ -462,37 +545,35 @@ BIC:XXXXDK22",
     "statementDate": 2014-07-30T00:00:00.000Z,
     "transactionReference": "B4G30MS9D00A003D",
     "transactions": Array [
-      Object {
+      Transaction {
         "amount": -2760,
         "bankReference": "B4G29PGCVO7Q06US",
         "currency": "EUR",
         "date": 2014-07-29T00:00:00.000Z,
-        "details": " /XXXX//100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL)
+        "detailSegments": Array [
+          " /XXXX//100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL)
  /ORDP/XX XXXXXX XXXXX XXXX N.A.25 XXXX XXXXX, CANARY WHARF
  /REMI/UBERWEISUNG OUR REF: 03MT181024144353
 YOUR REF: P6363103 240 1   M CA O/XXXXGB2L
 /ACC/INST/XXXXGB2L         /6231400604
 BIC:XXXXGB2L",
+        ],
         "entryDate": 2014-07-29T00:00:00.000Z,
         "extraDetails": "/OCMT/EUR10,00/",
         "fundsCode": "",
         "isReversal": false,
         "reference": "NONREF",
-        "structuredDetails": Object {
-          "ACC": "INST/XXXXGB2L         /6231400604BIC:XXXXGB2L",
-          "ORDP": "XX XXXXXX XXXXX XXXX N.A.25 XXXX XXXXX, CANARY WHARF ",
-          "REMI": "UBERWEISUNG OUR REF: 03MT181024144353YOUR REF: P6363103 240 1   M CA O/XXXXGB2L",
-          "XXXX": "/100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL) ",
-        },
         "transactionType": "NTRF",
       },
-      Object {
+      Transaction {
         "amount": 500,
         "bankReference": "B4G29PGDCK1QFV3E",
         "currency": "EUR",
         "date": 2014-07-29T00:00:00.000Z,
-        "details": "12160475 0050001631430920 ORDERID: 264267 MEDIA MARKT ONLINE NE
+        "detailSegments": Array [
+          "12160475 0050001631430920 ORDERID: 264267 MEDIA MARKT ONLINE NE
 REK: NL84INGB0234561789/NAAM: MMS ONLINE NEDERLAND B.V.",
+        ],
         "entryDate": 2014-07-29T00:00:00.000Z,
         "extraDetails": "",
         "fundsCode": "",
@@ -501,6 +582,42 @@ REK: NL84INGB0234561789/NAAM: MMS ONLINE NEDERLAND B.V.",
         "transactionType": "NTRF",
       },
     ],
+  },
+]
+`;
+
+exports[`Parser Full Examples testX.mt940 transaction computed state 1`] = `
+Array [
+  Object {
+    "details": " /XXXX//100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL)
+ /ORDP/XXXXXXXXXXXXX XXXXXXXX BANKEN AB (PUBL) (FORMER: SXB A
+ /REMI/XXXXXXXXXXX OUR REF: 03MT181012182288
+YOUR REF: 181012671        M CA O/XXXXDK22
+BIC:XXXXDK22",
+    "structuredDetails": Object {
+      "ORDP": "XXXXXXXXXXXXX XXXXXXXX BANKEN AB (PUBL) (FORMER: SXB A ",
+      "REMI": "XXXXXXXXXXX OUR REF: 03MT181012182288YOUR REF: 181012671        M CA O/XXXXDK22BIC:XXXXDK22",
+      "XXXX": "/100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL) ",
+    },
+  },
+  Object {
+    "details": " /XXXX//100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL)
+ /ORDP/XX XXXXXX XXXXX XXXX N.A.25 XXXX XXXXX, CANARY WHARF
+ /REMI/UBERWEISUNG OUR REF: 03MT181024144353
+YOUR REF: P6363103 240 1   M CA O/XXXXGB2L
+/ACC/INST/XXXXGB2L         /6231400604
+BIC:XXXXGB2L",
+    "structuredDetails": Object {
+      "ACC": "INST/XXXXGB2L         /6231400604BIC:XXXXGB2L",
+      "ORDP": "XX XXXXXX XXXXX XXXX N.A.25 XXXX XXXXX, CANARY WHARF ",
+      "REMI": "UBERWEISUNG OUR REF: 03MT181024144353YOUR REF: P6363103 240 1   M CA O/XXXXGB2L",
+      "XXXX": "/100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL) ",
+    },
+  },
+  Object {
+    "details": "12160475 0050001631430920 ORDERID: 264267 MEDIA MARKT ONLINE NE
+REK: NL84INGB0234561789/NAAM: MMS ONLINE NEDERLAND B.V.",
+    "structuredDetails": undefined,
   },
 ]
 `;

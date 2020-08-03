@@ -116,7 +116,7 @@ function expectedStatement() {
         transactionType: 'NTRF',
         date:            helpers.Date.parse('14', '05', '07'),
         entryDate:       helpers.Date.parse('14', '05', '07'),
-        details:         'LINE1\nLINE2',
+        detailSegments: [ 'LINE1\nLINE2' ],
         extraDetails:    '',
         fundsCode:       '',
       }
@@ -155,11 +155,25 @@ describe('Parser', () => {
 
     glob.sync('*.{mt940,mt940x}', { cwd: __dirname }).forEach(examplePath => {
       const example = fs.readFileSync(path.resolve(__dirname, examplePath), 'utf-8');
-      it(examplePath, () => {
-        const parser = new Parser();
-        const result = parser.parse({ data: example });
-        expect(result).toMatchSnapshot();
+
+      test(`${examplePath} statements`, () => {
+        const statements = new Parser().parse({ data: example });
+        expect(statements).toMatchSnapshot();
       });
+
+      test(`${examplePath} transaction computed state`, () => {
+        const statements = new Parser().parse({ data: example });
+        const transactions = statements
+          .flatMap(s => s.transactions)
+          .map(t => {
+            return {
+              details: t.details,
+              structuredDetails: t.structuredDetails,
+            };
+          });
+        expect(transactions).toMatchSnapshot();
+      });
+
     });
 
   });
@@ -210,11 +224,12 @@ describe('Parser', () => {
       expect(result.length).toEqual(1);
 
       const exp = expectedStatement();
-      exp.transactions[0].details = '?20some?21data';
-      exp.transactions[0].structuredDetails = {
+      exp.transactions[0].detailSegments = [ '?20some?21data' ];
+      expect(result[0].transactions[0].details).toEqual('?20some?21data');
+      expect(result[0].transactions[0].structuredDetails).toEqual({
         '20': 'some',
         '21': 'data',
-      };
+      });
       expect(result[0]).toEqual(exp);
 
       parser = new Parser();
@@ -344,7 +359,7 @@ describe('Parser', () => {
             transactionType: 'NTRF',
             date:            helpers.Date.parse('14', '05', '07'),
             entryDate:       helpers.Date.parse('14', '05', '07'),
-            details:         'LINE1',
+            detailSegments: [ 'LINE1' ],
             extraDetails:    '',
             fundsCode:       '',
           },
@@ -357,7 +372,7 @@ describe('Parser', () => {
             transactionType: 'NTRF',
             date:            helpers.Date.parse('14', '05', '07'),
             entryDate:       helpers.Date.parse('14', '05', '07'),
-            details:         'LINE2',
+            detailSegments: [ 'LINE2' ],
             extraDetails:    '',
             fundsCode:       '',
             nonSwift:        'Hello world',
@@ -371,7 +386,7 @@ describe('Parser', () => {
             transactionType: 'NTRF',
             date:            helpers.Date.parse('14', '05', '07'),
             entryDate:       helpers.Date.parse('14', '05', '07'),
-            details:         'LINE3',
+            detailSegments: [ 'LINE3' ],
             extraDetails:    '',
             fundsCode:       '',
             nonSwift:        'Hello\nbank info',
