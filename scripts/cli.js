@@ -24,7 +24,15 @@ function showHelp() {
   Parse a Swift input file and output as JSON.
 
   Options:
+
     --help, -h    Show help
+
+    --tags        Include parsed tags in output
+
+    --no-86-structure
+                  Suppress parsing of structured "86" transaction tag detail
+                  lines
+
 `);
 }
 
@@ -35,6 +43,8 @@ function errorExit(e) {
 
 const argv = process.argv.slice(2);
 let file = null;
+let withTags = false;
+let with86Structure = true;
 
 argv.forEach(arg => {
   switch (arg) {
@@ -42,6 +52,12 @@ argv.forEach(arg => {
   case '-h':
     showHelp();
     process.exit();
+    break;
+  case '--no-86':
+    with86Structure = false;
+    break;
+  case '--tags':
+    withTags = true;
     break;
   default:
     file = arg;
@@ -57,7 +73,7 @@ async function main() {
   const fs = require('fs');
   const parser = require('..');
   const data = fs.readFileSync(file, { encoding: 'utf8' });
-  return parser.parse({ data });
+  return parser.parse({ data, with86Structure, withTags });
 }
 
 main()
