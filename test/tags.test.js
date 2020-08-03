@@ -1,5 +1,6 @@
 const tags   = require('../lib/tags');
 const tf     = new tags.TagFactory();
+const helperModels = require('../lib/helperModels');
 
 describe('Tags', () => {
   describe('TagFactory', () => {
@@ -27,6 +28,47 @@ describe('Tags', () => {
       const tag = tf.createTag('28', null, str);
       expect(tag.fields.statementNumber).toEqual('998');
       expect(tag.fields.sequenceNumber).toEqual('1');
+    });
+
+    it('should create tag 34F (DebitAndCreditFloorLimitIndicator) Without DC mark', () => {
+      const str = 'AAA123';
+      const tag = tf.createTag('34', 'F', str);
+      expect(tag.fields.currency).toEqual('AAA');
+      expect(tag.fields.dcMark).toEqual('');
+      expect(tag.fields.amount).toEqual('123');
+    });
+
+    it('should create tag 34F (DebitAndCreditFloorLimitIndicator) With DC mark', ()=>{
+      const str = 'AAAD123';
+      const tag = tf.createTag('34F', null, str);
+      expect(tag.fields.currency).toEqual('AAA');
+      expect(tag.fields.dcMark).toEqual('D');
+      expect(tag.fields.amount).toEqual('123');
+    });
+
+    it('should create tag 13D (TagDateTimeIndication)', () => {
+      const str = '0901081515+1300';
+      const tag = tf.createTag('13', 'D', str);
+      expect(tag.fields.dateTimestamp).toEqual(helperModels.Date.forOffsetDateTime({
+        date: '090108',
+        time: '1515',
+        offset: '+1300'}));
+    });
+
+    it('should create tag 90D (NumberAndSumOfEntriesD)', () => {
+      const str = '123AAA123456';
+      const tag = tf.createTag('90', 'D', str);
+      expect(tag.fields.number).toEqual('123');
+      expect(tag.fields.currency).toEqual('AAA');
+      expect(tag.fields.amount).toEqual('123456');
+    });
+
+    it('should create tag 90C (NumberAndSumOfEntriesC)', () => {
+      const str = '123AAA123456';
+      const tag = tf.createTag('90', 'C', str);
+      expect(tag.fields.number).toEqual('123');
+      expect(tag.fields.currency).toEqual('AAA');
+      expect(tag.fields.amount).toEqual('123456');
     });
 
     it('should create tag NS (NonSwift)', () => {
