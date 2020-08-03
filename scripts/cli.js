@@ -55,10 +55,9 @@ if (!file) {
 
 async function main() {
   const fs = require('fs');
-  const Parser = require('../lib/parser');
-  const parser = new Parser();
+  const parser = require('..');
   const data = fs.readFileSync(file, { encoding: 'utf8' });
-  return parser.parse(data);
+  return parser.parse({ data });
 }
 
 main()

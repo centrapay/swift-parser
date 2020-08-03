@@ -17,20 +17,12 @@
 
 /**
  * MT940 parser
- * @module ./index
+ * @module swift-parser
  */
 
 const Parser  = require('./lib/parser');
-const Helpers = require('./lib/helperModels');
+const parser = new Parser();
 
 module.exports = {
-  /** MT940 Parser - main class
-   * @see {@link Parser}
-   */
-  Parser,
-
-  /** Optional helper classes
-   * @see {@link lib/helperModels}
-   */
-  Helpers,
+  parse: parser.parse.bind(parser),
 };
