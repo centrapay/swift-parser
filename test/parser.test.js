@@ -104,6 +104,8 @@ function expectedStatement() {
     forwardAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
     closingAvailableBalance:     500.0,
     forwardAvailableBalance:     500.0,
+    informationToAccountOwner: '',
+    messageBlocks: {},
     transactions: [
       {
         amount:          500.00,
@@ -330,6 +332,8 @@ describe('Parser', () => {
         forwardAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
         closingAvailableBalance:     600.0,
         forwardAvailableBalance:     600.0,
+        informationToAccountOwner: '',
+        messageBlocks: {},
         transactions: [
           {
             amount:          100.00,

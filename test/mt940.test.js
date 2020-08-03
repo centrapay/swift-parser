@@ -39,6 +39,8 @@ function expectedStatement() {
     forwardAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
     closingAvailableBalance:     500.0,
     forwardAvailableBalance:     500.0,
+    informationToAccountOwner: '',
+    messageBlocks: {},
     transactions: [
       {
         amount:          500.00,
