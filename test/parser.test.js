@@ -193,30 +193,6 @@ describe('Parser', () => {
 
   });
 
-  /* MIDDLEWARES */
-  describe('Middlewares', () => {
-    it('post parse wrong fn throws', () => {
-      const parser = new Parser();
-      expect(() => parser.usePostParse(1)).toThrow(/middleware must be a function/);
-    });
-    it('post parse middleware', () => {
-      const parser = new Parser();
-      parser.usePostParse((s, next) => {
-        s.dummyMarker = true;
-        next();
-      });
-      parser.usePostParse((s, next) => {
-        if (s.dummyMarker) s.dummyMarker2 = true;
-        next();
-      });
-
-      const result = parser.parse({ data: DUMMY_STATEMENT_LINES.join('\n') });
-      expect(result).toBeDefined();
-      expect(result[0].dummyMarker).toBe(true);
-      expect(result[0].dummyMarker2).toBe(true);
-    });
-  });
-
   /* INTEGRATION TEST */
   describe('Integration test', () => {
     it('typical statement', () => {
