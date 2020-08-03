@@ -2,7 +2,7 @@
 
 exports[`Parser Full Examples test-with-NS.mt940x 1`] = `
 Array [
-  Object {
+  Statement {
     "accountIdentification": "B4E08MS9D00A0009",
     "closingAvailableBalance": 2996.53,
     "closingAvailableBalanceDate": 2017-01-24T00:00:00.000Z,
@@ -11,6 +11,8 @@ Array [
     "currency": "PLN",
     "forwardAvailableBalance": 2996.53,
     "forwardAvailableBalanceDate": 2017-01-24T00:00:00.000Z,
+    "informationToAccountOwner": "",
+    "messageBlocks": Object {},
     "number": Object {
       "section": "",
       "sequence": "1",
@@ -18,7 +20,7 @@ Array [
     },
     "openingBalance": 3503.6,
     "openingBalanceDate": 2017-01-01T00:00:00.000Z,
-    "relatedReference": "",
+    "relatedReference": undefined,
     "statementDate": 2017-01-24T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
@@ -82,7 +84,7 @@ UL. SPOKOJNA 3",
       },
     ],
   },
-  Object {
+  Statement {
     "accountIdentification": "B4E08MS9D00A0009",
     "closingAvailableBalance": 2971.53,
     "closingAvailableBalanceDate": 2017-01-31T00:00:00.000Z,
@@ -91,6 +93,8 @@ UL. SPOKOJNA 3",
     "currency": "PLN",
     "forwardAvailableBalance": 2971.53,
     "forwardAvailableBalanceDate": 2017-01-31T00:00:00.000Z,
+    "informationToAccountOwner": "",
+    "messageBlocks": Object {},
     "number": Object {
       "section": "",
       "sequence": "2",
@@ -98,7 +102,7 @@ UL. SPOKOJNA 3",
     },
     "openingBalance": 2996.53,
     "openingBalanceDate": 2017-01-24T00:00:00.000Z,
-    "relatedReference": "",
+    "relatedReference": undefined,
     "statementDate": 2017-01-31T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
@@ -131,7 +135,7 @@ UL. SPOKOJNA 3",
 
 exports[`Parser Full Examples test1.mt940 1`] = `
 Array [
-  Object {
+  Statement {
     "accountIdentification": "123456789",
     "closingAvailableBalance": 500,
     "closingAvailableBalanceDate": 2014-05-08T00:00:00.000Z,
@@ -140,6 +144,7 @@ Array [
     "currency": "EUR",
     "forwardAvailableBalance": 500,
     "forwardAvailableBalanceDate": 2014-05-08T00:00:00.000Z,
+    "informationToAccountOwner": "",
     "messageBlocks": Object {
       "1": Object {
         "value": "F01KNABNL2HAXXX0000000000",
@@ -155,7 +160,7 @@ Array [
     },
     "openingBalance": 0,
     "openingBalanceDate": 2014-05-07T00:00:00.000Z,
-    "relatedReference": "",
+    "relatedReference": undefined,
     "statementDate": 2014-05-08T00:00:00.000Z,
     "transactionReference": "B4E08MS9D00A0009",
     "transactions": Array [
@@ -175,7 +180,7 @@ WANT DAT IS ZOALS DE NEDERLANDSE BANKEN COMMUNICEREN",
       },
     ],
   },
-  Object {
+  Statement {
     "accountIdentification": "123456789",
     "closingAvailableBalance": 798.98,
     "closingAvailableBalanceDate": 2014-07-30T00:00:00.000Z,
@@ -184,6 +189,7 @@ WANT DAT IS ZOALS DE NEDERLANDSE BANKEN COMMUNICEREN",
     "currency": "EUR",
     "forwardAvailableBalance": 798.98,
     "forwardAvailableBalanceDate": 2014-07-30T00:00:00.000Z,
+    "informationToAccountOwner": "",
     "messageBlocks": Object {
       "1": Object {
         "value": "F01KNABNL2HAXXX0000000000",
@@ -199,7 +205,7 @@ WANT DAT IS ZOALS DE NEDERLANDSE BANKEN COMMUNICEREN",
     },
     "openingBalance": 3058.98,
     "openingBalanceDate": 2014-07-29T00:00:00.000Z,
-    "relatedReference": "",
+    "relatedReference": undefined,
     "statementDate": 2014-07-30T00:00:00.000Z,
     "transactionReference": "B4G30MS9D00A003D",
     "transactions": Array [
@@ -238,7 +244,7 @@ REK: NL84INGB0234561789/NAAM: MMS ONLINE NEDERLAND B.V.",
 
 exports[`Parser Full Examples test2.mt940x 1`] = `
 Array [
-  Object {
+  Statement {
     "accountIdentification": "B4E08MS9D00A0009",
     "closingAvailableBalance": 2996.53,
     "closingAvailableBalanceDate": 2017-01-24T00:00:00.000Z,
@@ -247,6 +253,8 @@ Array [
     "currency": "PLN",
     "forwardAvailableBalance": 2996.53,
     "forwardAvailableBalanceDate": 2017-01-24T00:00:00.000Z,
+    "informationToAccountOwner": "",
+    "messageBlocks": Object {},
     "number": Object {
       "section": "",
       "sequence": "1",
@@ -254,7 +262,7 @@ Array [
     },
     "openingBalance": 3503.6,
     "openingBalanceDate": 2017-01-01T00:00:00.000Z,
-    "relatedReference": "",
+    "relatedReference": undefined,
     "statementDate": 2017-01-24T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
@@ -318,7 +326,7 @@ UL. SPOKOJNA 3",
       },
     ],
   },
-  Object {
+  Statement {
     "accountIdentification": "B4E08MS9D00A0009",
     "closingAvailableBalance": 2971.53,
     "closingAvailableBalanceDate": 2017-01-31T00:00:00.000Z,
@@ -327,6 +335,8 @@ UL. SPOKOJNA 3",
     "currency": "PLN",
     "forwardAvailableBalance": 2971.53,
     "forwardAvailableBalanceDate": 2017-01-31T00:00:00.000Z,
+    "informationToAccountOwner": "",
+    "messageBlocks": Object {},
     "number": Object {
       "section": "",
       "sequence": "2",
@@ -334,7 +344,7 @@ UL. SPOKOJNA 3",
     },
     "openingBalance": 2996.53,
     "openingBalanceDate": 2017-01-24T00:00:00.000Z,
-    "relatedReference": "",
+    "relatedReference": undefined,
     "statementDate": 2017-01-31T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
@@ -364,7 +374,7 @@ UL. SPOKOJNA 3",
 
 exports[`Parser Full Examples testX.mt940 1`] = `
 Array [
-  Object {
+  Statement {
     "accountIdentification": "123456789",
     "closingAvailableBalance": 500,
     "closingAvailableBalanceDate": 2014-05-08T00:00:00.000Z,
@@ -373,6 +383,7 @@ Array [
     "currency": "EUR",
     "forwardAvailableBalance": 500,
     "forwardAvailableBalanceDate": 2014-05-08T00:00:00.000Z,
+    "informationToAccountOwner": "",
     "messageBlocks": Object {
       "1": Object {
         "value": "F01KNABNL2HAXXX0000000000",
@@ -391,7 +402,7 @@ Array [
     },
     "openingBalance": 0,
     "openingBalanceDate": 2014-05-07T00:00:00.000Z,
-    "relatedReference": "",
+    "relatedReference": undefined,
     "statementDate": 2014-05-08T00:00:00.000Z,
     "transactionReference": "B4E08MS9D00A0009",
     "transactions": Array [
@@ -419,7 +430,7 @@ BIC:XXXXDK22",
       },
     ],
   },
-  Object {
+  Statement {
     "accountIdentification": "123456789",
     "closingAvailableBalance": 798.98,
     "closingAvailableBalanceDate": 2014-07-30T00:00:00.000Z,
@@ -428,6 +439,7 @@ BIC:XXXXDK22",
     "currency": "EUR",
     "forwardAvailableBalance": 798.98,
     "forwardAvailableBalanceDate": 2014-07-30T00:00:00.000Z,
+    "informationToAccountOwner": "",
     "messageBlocks": Object {
       "1": Object {
         "value": "F01KNABNL2HAXXX0000000000",
@@ -446,7 +458,7 @@ BIC:XXXXDK22",
     },
     "openingBalance": 3058.98,
     "openingBalanceDate": 2014-07-29T00:00:00.000Z,
-    "relatedReference": "",
+    "relatedReference": undefined,
     "statementDate": 2014-07-30T00:00:00.000Z,
     "transactionReference": "B4G30MS9D00A003D",
     "transactions": Array [
