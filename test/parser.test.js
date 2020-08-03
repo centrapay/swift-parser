@@ -130,15 +130,6 @@ const DUMMY_GROUP_SIMPLE = [
   new Tags.TagTransactionDetails('DETAILS'),
   new Tags.TagClosingBalance('C140508EUR500,00')
 ];
-const DUMMY_GROUP_STRUCTURED = [
-  new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
-  new Tags.TagAccountIdentification('123456789'),
-  new Tags.TagStatementNumber('123/1'),
-  new Tags.TagOpeningBalance('C140507EUR0,00'),
-  new Tags.TagStatementLine('1405070507C500,00NTRFNONREF//AUXREF'),
-  new Tags.TagTransactionDetails('?20Hello?30World'),
-  new Tags.TagClosingBalance('C140508EUR500,00')
-];
 const DUMMY_GROUP_COMPLEX = [ // 2 detail lines and 2 transactions
   new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
   new Tags.TagRelatedReference('X'),
@@ -200,75 +191,6 @@ describe('Parser', () => {
       expect(result).toEqual(groups);
     });
 
-    it('_buildStatement', () => {
-      const parser = new Parser();
-      const group  = DUMMY_GROUP_COMPLEX;
-      let result   = parser._buildStatement({ group });
-
-      let exp  = expectedStatement();
-      exp.transactions.push({ // patch
-        amount: 0.00,
-        currency: 'EUR',
-        isReversal: false,
-        reference: 'NONREF2',
-        bankReference: '',
-        transactionType: 'NTRF',
-        date: helpers.Date.parse('14', '05', '07'),
-        entryDate: helpers.Date.parse('14', '05', '07'),
-        details: 'LINE1',
-        extraDetails: '',
-        fundsCode: '',
-      });
-      expect(result).toEqual(exp);
-      expect(result.tags).not.toBeDefined();
-      expect(result.structuredDetails).not.toBeDefined();
-
-      // with Tags
-      result = parser._buildStatement({ group, withTags: true });
-      expect(result.tags).toEqual(group);
-    });
-
-    it('_buildStatement structured', () => {
-      const parser = new Parser();
-      const result = parser._buildStatement({ group: DUMMY_GROUP_STRUCTURED, with86Structure: true });
-      expect(result.transactions[0].structuredDetails).toEqual({
-        '20': 'Hello',
-        '30': 'World',
-      });
-    });
-
-    it('_validateGroup throws', () => {
-      const parser = new Parser();
-      expect(parser._validateGroup.bind(parser, [ // missing tags
-        new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
-      ])).toThrow(/Mandatory tag/);
-      expect(parser._validateGroup.bind(parser, [ // missing tags
-        new Tags.TagClosingBalance('C140508EUR500,00')
-      ])).toThrow(/Mandatory tag/);
-      expect(parser._validateGroup.bind(parser, [ // missing tags
-        new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
-        new Tags.TagOpeningBalance('C140507EUR0,00'),
-        new Tags.TagClosingBalance('C140508EUR500,00')
-      ])).toThrow(/Mandatory tag/);
-      expect(parser._validateGroup.bind(parser, [ // inconsistent currency
-        new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
-        new Tags.TagAccountIdentification('123456789'),
-        new Tags.TagStatementNumber('123/1'),
-        new Tags.TagOpeningBalance('C140507EUR0,00'),
-        new Tags.TagStatementLine('1405070507C500,00NTRFNONREF//AUXREF'),
-        new Tags.TagTransactionDetails('DETAILS'),
-        new Tags.TagClosingBalance('C140508USD500,00')
-      ])).toThrow(/Currency markers/);
-      expect(parser._validateGroup.bind(parser, [ // inconsistent balances
-        new Tags.TagTransactionReferenceNumber('B4E08MS9D00A0009'),
-        new Tags.TagAccountIdentification('123456789'),
-        new Tags.TagStatementNumber('123/1'),
-        new Tags.TagOpeningBalance('C140507EUR0,00'),
-        new Tags.TagStatementLine('1405070507C400,00NTRFNONREF//AUXREF'),
-        new Tags.TagTransactionDetails('DETAILS'),
-        new Tags.TagClosingBalance('C140508EUR500,00')
-      ])).toThrow(/Sum of lines/);
-    });
   });
 
   /* MIDDLEWARES */
