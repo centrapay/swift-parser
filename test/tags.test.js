@@ -18,6 +18,7 @@
 const tags   = require('../lib/tags');
 const tf     = new tags.TagFactory();
 const helperModels = require('../lib/helperModels');
+const BigNumber = require('bignumber.js');
 
 describe('Tags', () => {
   describe('TagFactory', () => {
@@ -52,7 +53,7 @@ describe('Tags', () => {
       const tag = tf.createTag('34', 'F', str);
       expect(tag.fields.currency).toEqual('AAA');
       expect(tag.fields.dcMark).toEqual('');
-      expect(tag.fields.amount).toEqual('123');
+      expect(tag.fields.amount).toEqual(BigNumber('123'));
     });
 
     it('should create tag 34F (DebitAndCreditFloorLimitIndicator) With DC mark', ()=>{
@@ -60,7 +61,7 @@ describe('Tags', () => {
       const tag = tf.createTag('34F', null, str);
       expect(tag.fields.currency).toEqual('AAA');
       expect(tag.fields.dcMark).toEqual('D');
-      expect(tag.fields.amount).toEqual('123');
+      expect(tag.fields.amount).toEqual(BigNumber('123'));
     });
 
     it('should create tag 13D (TagDateTimeIndication)', () => {
@@ -77,7 +78,7 @@ describe('Tags', () => {
       const tag = tf.createTag('90', 'D', str);
       expect(tag.fields.number).toEqual('123');
       expect(tag.fields.currency).toEqual('AAA');
-      expect(tag.fields.amount).toEqual('123456');
+      expect(tag.fields.amount).toEqual(BigNumber('123456'));
     });
 
     it('should create tag 90C (NumberAndSumOfEntriesC)', () => {
@@ -85,7 +86,7 @@ describe('Tags', () => {
       const tag = tf.createTag('90', 'C', str);
       expect(tag.fields.number).toEqual('123');
       expect(tag.fields.currency).toEqual('AAA');
-      expect(tag.fields.amount).toEqual('123456');
+      expect(tag.fields.amount).toEqual(BigNumber('123456'));
     });
 
     it('should create tag NS (NonSwift)', () => {
@@ -99,7 +100,7 @@ describe('Tags', () => {
       const tag = tf.createTag('60', null, str);
       expect(tag.fields.date.toISOString().substr(0,10)).toEqual('2016-05-07');
       expect(tag.fields.currency).toEqual('EUR');
-      expect(tag.fields.amount).toEqual(123.89);
+      expect(tag.fields.amount).toEqual(BigNumber(123.89));
     });
 
     it('should create tag 62 (ClosingBalance)', () => {
@@ -107,7 +108,7 @@ describe('Tags', () => {
       const tag = tf.createTag('62', null, str);
       expect(tag.fields.date.toISOString().substr(0,10)).toEqual('2016-05-07');
       expect(tag.fields.currency).toEqual('EUR');
-      expect(tag.fields.amount).toEqual(123.89);
+      expect(tag.fields.amount).toEqual(BigNumber(123.89));
     });
 
     it('should create tag 64 (ClosingAvailableBalance)', () => {
@@ -115,7 +116,7 @@ describe('Tags', () => {
       const tag = tf.createTag('64', null, str);
       expect(tag.fields.date.toISOString().substr(0,10)).toEqual('2016-05-07');
       expect(tag.fields.currency).toEqual('EUR');
-      expect(tag.fields.amount).toEqual(123.89);
+      expect(tag.fields.amount).toEqual(BigNumber(123.89));
     });
 
     it('should create tag 65 (ForwardAvailableBalance)', () => {
@@ -123,7 +124,7 @@ describe('Tags', () => {
       const tag = tf.createTag('65', null, str);
       expect(tag.fields.date.toISOString().substr(0,10)).toEqual('2016-05-07');
       expect(tag.fields.currency).toEqual('EUR');
-      expect(tag.fields.amount).toEqual(123.89);
+      expect(tag.fields.amount).toEqual(BigNumber(123.89));
     });
 
     it('should create tag 61 (StatementLine)', () => {
@@ -131,7 +132,7 @@ describe('Tags', () => {
       const tag = tf.createTag('61', null, str);
       expect(tag.fields.date.toISOString().substr(0,10)).toEqual('2016-05-07');
       expect(tag.fields.entryDate.toISOString().substr(0,10)).toEqual('2016-05-07');
-      expect(tag.fields.amount).toEqual(-123.89);
+      expect(tag.fields.amount).toEqual(BigNumber(-123.89));
       expect(tag.fields.transactionType).toEqual('NTRF');
       expect(tag.fields.reference).toEqual('NONREF');
       expect(tag.fields.bankReference).toEqual('B4E07XM00J000023');
@@ -143,7 +144,7 @@ describe('Tags', () => {
       const tag = tf.createTag('61', null, str);
       expect(tag.fields.date.toISOString().substr(0,10)).toEqual('2016-05-07');
       expect(tag.fields.entryDate.toISOString().substr(0,10)).toEqual('2016-05-07');
-      expect(tag.fields.amount).toEqual(123.89); // Reversed
+      expect(tag.fields.amount).toEqual(BigNumber(123.89)); // Reversed
       expect(tag.fields.transactionType).toEqual('NTRF');
       expect(tag.fields.reference).toEqual('NONREF');
       expect(tag.fields.bankReference).toEqual('B4E07XM00J000023');
@@ -156,7 +157,7 @@ describe('Tags', () => {
       const tag = tf.createTag('61', null, str);
       expect(tag.fields.date.toISOString().substr(0,10)).toEqual('2016-05-07');
       expect(tag.fields.entryDate.toISOString().substr(0,10)).toEqual('2016-05-07');
-      expect(tag.fields.amount).toEqual(-123.89);
+      expect(tag.fields.amount).toEqual(BigNumber(-123.89));
       expect(tag.fields.transactionType).toEqual('NTRF');
       expect(tag.fields.reference).toEqual('NONREF');
       expect(tag.fields.bankReference).toEqual('B4E07XM00J000023');
@@ -169,7 +170,7 @@ describe('Tags', () => {
       const tag = tf.createTag('61', null, str);
       expect(tag.fields.date.toISOString().substr(0,10)).toEqual('2017-04-06');
       expect(tag.fields.isReversal).toEqual(false);
-      expect(tag.fields.amount).toEqual(-1001.69);
+      expect(tag.fields.amount).toEqual(BigNumber(-1001.69));
       expect(tag.fields.transactionType).toEqual('N541');
       expect(tag.fields.reference).toEqual('NONREF');
       expect(tag.fields.extraDetails).toEqual('NL72RABO0104510633');
