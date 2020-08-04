@@ -14,12 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - parser middleware support
 - "withTags" parse option
 - Parser class not exposed from main module
-- Statement.statementDate
 
 ### Changed
 - parse method exposed in main module
 - parse method accepts opts object and returns Statement instances
 - parse method does not validate by default
+- numbers returned as BigNumber
 
 ## [0.2.0] - 2020-08-03
 

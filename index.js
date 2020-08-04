@@ -42,9 +42,9 @@ module.exports = {
    *   data: fs.readFileSync(path, 'utf8'),
    * });
    *
-   * statements.forEach(statement => {
-   *   console.log(statement.accountIdentification, statement.number.statement);
-   *   statement.transactions.forEach(txn => {
+   * statements.forEach(stmt => {
+   *   console.log(stmt.statementDate, stmt.accountIdentification, stmt.number.statement);
+   *   stmt.transactions.forEach(txn => {
    *     console.log(txn.amount, txn.currency);
    *   };
    * };
