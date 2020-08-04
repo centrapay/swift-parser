@@ -31,7 +31,7 @@ function showHelp() {
 
     --type, -t    Set input file type.
 
-                  Valid: mt940
+                  Valid: mt940, mt942
 
                   Default: File extension or mt940
 `);
@@ -47,7 +47,7 @@ let file = null;
 let type = null;
 
 function validateType(s) {
-  if (['mt940'].includes(s)) {
+  if (['mt940','mt942'].includes(s)) {
     return s;
   }
   return undefined;
@@ -87,7 +87,7 @@ async function main() {
   const fs = require('fs');
   const parser = require('..');
   const data = fs.readFileSync(file, { encoding: 'utf8' });
-  return parser.parse({ data });
+  return parser.parse({ data, type });
 }
 
 main()
