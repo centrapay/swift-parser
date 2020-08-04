@@ -1,152 +1,164 @@
-# SWIFT MT940 bank statement format JS parser
+# Centrapay SWIFT Parser
 
-[![Build Status](https://travis-ci.org/a-fas/mt940js.svg?branch=master)](https://travis-ci.org/a-fas/mt940js)
-[![NPM version](https://badge.fury.io/js/mt940js.svg)](https://badge.fury.io/js/mt940js)
-[![codecov](https://codecov.io/gh/a-fas/mt940js/branch/master/graph/badge.svg)](https://codecov.io/gh/a-fas/mt940js)
+SWIFT bank statement parser for JavaScript (ES2015). Supports [MT 940 Customer
+Statement Message][MT940] and [MT 942 Interim Transaction Report][MT942].
 
-*[History of changes](/changelog.txt)*  
-
-mt940js is a SWIFT mt940 bank statement format parser for javascript (ES2015). Takes in text of mt940 file, puts out array of parsed statements and transactions.
-See examples below.
 
 ## Installation
 
 ```bash
-npm install mt940js
+npm install @centrapay/swift-parser
 ```
 
-## API and usage
-
-Main parser class - `Parser` - parses input text (e.g. read from a file) into array of statements (a file may contain one or more). Each output statement contains a set of attributes, describing opening balance, statement number, etc and also an array of transactions.
-
-**Example**
+## Usage
 
 ```javascript
-const mt940js = require('mt940js');
-const parser  = new mt940js.Parser();
+const parser = require('@centrapay/swift-parser');
+const statements = parser.parse({
+  type: 'mt940',
+  data: fs.readFileSync(path, 'utf8'),
+});
 
-const statements = parser.parse(fs.readFileSync('./some_path', 'utf8'));
-
-for (let s of statements) {
- console.log(s.number.statement, s.statementDate);
-
- for (let t of s.transactions) {
-   console.log(t.amount, t.currency);
- }
-}
+statements.forEach(statement => {
+  console.log(statement.accountIdentification, statement.number.statement);
+  statement.transactions.forEach(txn => {
+    console.log(txn.amount, txn.currency);
+  };
+};
 ```
 
-### Statement
 
--  `transactionReference` {string} - tag 20 reference
--  `relatedReference` {string} - tag 21 reference, *optional*
--  `accountIdentification` {string} - tag 25 own bank account identification
--  `number.statement` {string} - tag 28 main statement number
--  `number.sequence` {string} - tag 28 statement sub number (sequence), *optional*
--  `number.section` {string} - tag 28 statement sub sub number (present on some banks), *optional*
--  `openingBalanceDate` {Date} - tag 60 statement opening date
--  `closingBalanceDate` {Date} - tag 62 statement closing date
--  `closingAvailableBalanceDate` {Date} - tag 64 closing available balance date, default = closing date
--  `forwardAvailableBalanceDate` {Date} - tag 65 forward available balance date, default = closing available date
--  `statementDate` {Date} - abstraction for statement date = `closingBalanceDate`
--  `currency` {string} - statement currency (USD, EUR ...)
--  `openingBalance` {Number} - beginning balance of the statement (with sign, based on debit/credit mark)
--  `closingBalance` {Number} - ending balance of the statement (with sign, based on debit/credit mark)
--  `closingAvailableBalance` {Number} - tag 64 closing available balance, default = closing balance
--  `forwardAvailableBalance` {Number} - tag 65 forward available balance, default = closing available
--  `informationToAccountOwner` {string} - additional statement level information
--  `transactions` {array}  - collection of transactions
--  `messageBlocks` {object} - statement message blocks, if present (EXPERIMENTAL)
- 
-**Each Transaction contains data of tag 61 (and tag 86 for details)**
+## CLI
 
-- `date` {Date} - transaction date
-- `amount` {Number} - transaction amount (with sign, Credit+, Debit-)
-- `reversal` {Boolean} - transaction is a reversal
-- `currency` {string} - transaction currency (copy of statement currency)
-- `details` {string} - content of relevant 86 tag(s), may be multiline (`\n` separated)
-- `transactionType` {string} - MT940 transaction type code (e.g. NTRF ...)
-- `reference` {string} - payment reference field
-- `entryDate` {Date} - entry date field, *optional*
-- `fundsCode` {string} - funds code field, *optional*
-- `bankReference` {string} - bank reference, *optional*
-- `extraDetails` {string} - extra details (supplementary details), *optional*
-- `structuredDetails` {Object} - structured details if detected, in for of `{ subtag: value }` e.g. `{ '20': '123456' }`
-- `nonSwift` {string} - optional, content of NS tag which happened in the context of transaction (after tags 61 or 86), can be multiline (separated by `\n`)
+This package also includes a CLI which parses a SWIFT file and outputs the result as JSON:
 
-Each statement is validated for: 
+```bash
+swift-parse -t mt942 my-statement.txt
+```
+
+
+## API
+
+### parser.parse()
+
+Parse a SWIFT statement document.
+
+If `parser.parse()` is invoked with `{ validate: true }` then MT940 statements
+are additionally validated for:
 
 - all strictly required tags
 - opening/closing balance currency is the same
 - opening balance + turnover = closing balance
 
-### Invocation
+**Returns:** Array\<Statement\>
 
-The `Parser` has just one method - `parse(data, withTags = false)` - which will convert raw mt940 string to an array of statements described above. The optional `withTags` parameter would preserve parsed tags to an additional `tags` attribute of a statement (for any additional further analysis).
+**Params:**
 
-### Support for field 86 structure
+| Param    | Type    | Description                                           |
+|----------|---------|-------------------------------------------------------|
+| data     | string  | raw SWIFT message text                                |
+| type     | string  | message format (mt940 or mt942)                       |
+| validate | boolean | *Optional* perform additional semantic error checking |
 
-Currently the library supports the following tag formats:
-- `'<sep>DD'`, where `<sep>` can be `'>'` or `'?'`
+
+### Statement
+
+| Field                       | Type      | Description                                                                |
+|-----------------------------|-----------|----------------------------------------------------------------------------|
+| transactionReference        | string    | tag 20 reference                                                           |
+| relatedReference            | string    | tag 21 reference                                                           |
+| accountIdentification       | string    | tag 25 own bank account identification                                     |
+| number.statement            | string    | tag 28 main statement number                                               |
+| number.sequence             | string    | tag 28 statement sub number (sequence)                                     |
+| number.section              | string    | tag 28 statement sub sub number (present on some banks)                    |
+| openingBalanceDate          | Date      | tag 60 statement opening date                                              |
+| closingBalanceDate          | Date      | tag 62 statement closing date                                              |
+| closingAvailableBalanceDate | Date      | tag 64 closing available balance date, default = closing date              |
+| forwardAvailableBalanceDate | Date      | tag 65 forward available balance date, default = closing available date    |
+| currency                    | string    | statement currency (USD, EUR ...)                                          |
+| openingBalance              | BigNumber | beginning balance of the statement (with sign, based on debit/credit mark) |
+| closingBalance              | BigNumber | ending balance of the statement (with sign, based on debit/credit mark)    |
+| closingAvailableBalance     | BigNumber | tag 64 closing available balance, default = closing balance                |
+| forwardAvailableBalance     | BigNumber | tag 65 forward available balance, default = closing available              |
+| informationToAccountOwner   | string    | additional statement level information                                     |
+| transactions                | array     | collection of transactions                                                 |
+| messageBlocks               | object    | statement message blocks, if present (EXPERIMENTAL)                        |
+
+
+### Transaction
+
+| Field             | Type      | Description                                                            |
+|-------------------|-----------|------------------------------------------------------------------------|
+| date              | Date      | transaction date                                                       |
+| amount            | BigNumber | transaction amount (with sign, Credit+, Debit-)                        |
+| reversal          | Boolean   | transaction is a reversal                                              |
+| currency          | string    | transaction currency (copy of statement currency)                      |
+| details           | string    | content of relevant 86 tag(s), may be multiline (`\n` separated)       |
+| transactionType   | string    | MT940 transaction type code (e.g. NTRF ...)                            |
+| reference         | string    | payment reference field                                                |
+| entryDate         | Date      | entry date field                                                       |
+| fundsCode         | string    | funds code field                                                       |
+| bankReference     | string    | bank reference                                                         |
+| extraDetails      | string    | extra details (supplementary details)                                  |
+| structuredDetails | Object    | structured details if detected                                         |
+| nonSwift          | string    | content of NS tags associated with a transaction (after tags 61 or 86) |
+
+
+### Structured Transaction Details
+
+The `transaction.structuredDetails` attribute can be used to access structured
+data from statement transaction details (SWIFT "86" tag).  The following
+structured detail formats are supported:
+- `'<sep>DD'`, where `<sep>` can be `'>'` or `'?'` and `DD` is two digits
 - `'/TAG/value'`, where `TAG` is 2 to 4 uppercase chars.
 
-Example:
+**Example**
 
 ```
-'>20some details >30more data'
-or
-'/ORDP/Smith Corp'
-``` 
+>20some details >30more data
+```
 
-The parser attempts to detect if field 86 contains tags like these and, if yes, adds `structuredDetails` attribute to a statement line. Tag digits are not interpreted as they are not standardized among different banks. Parsing 86 structure can be force disabled by passing `{ no86Structure: true }` to the constructor.
-
-```javascript
-// let incoming file contain one line with 86 field:
-// '>20some details>30more data'
-
-const statements = ... // parsing here
-
-for (let s of statements) {
- for (let t of s.transactions) {
-   console.log(t.structuredDetails);
-   // { '20': 'some details',
-   //   '30': 'more data' }
- }
+```json
+{
+  "20": "some details",
+  "30": "more data"
 }
 ```
 
-### Middlewares
+**Example**
 
-**Currently experimental, may change**
-
-The library support post processing middlewares which is called before returning parsed result. To append a middleware call `usePostParse` passing `fn(statement, next)`. Middlewares are called in the order of appending. Middlewares modify statement object directly. Beware that input data may contain several statements, middlewares are called over each of them one by one.
-
-```javascript
-  const parser = new Parser();
-  parser.usePostParse((s, next) => {
-    s.hasOverdraft = (s.closingBalance < 0);
-    next();
-  });
+```
+/ORDP/Smith Corp
 ```
 
-## Contribution
-Contribution is welcomed :)
+```json
+{
+  "ORDP": "Smith Corp"
+}
+```
 
-## TODO
-- pre parsing middlewares
-- parsing structure of block messages
 
-## Author
-[Alexander Tsybulsky](https://github.com/a-fas)
+## History
 
-## License
-The code is licensed under Apache-2.0 License. Please see [LICENSE](/LICENSE) for details.
+See [Changelog](./CHANGELOG.md)
+
+
+## Legal
+
+Copyright © 2015 [Alexander Tsybulsky][] and Copyright © 2020 [Centrapay][].
+
+This software is licensed under Apache-2.0 License. Please see [LICENSE](/LICENSE) for details.
+
 
 ## Credits
-Inspired by https://github.com/WoLpH/mt940
 
-## Standard references
-- https://www2.swift.com/knowledgecentre/publications/us9m_20180720/2.0
-- https://www.paiementor.com/payment-messages/
-- https://www.paiementor.com/swift-mt-message-structure-blocks-1-to-5/
-- https://www.nordea.se/Images/39-16149/MT940-file-description.pdf
+Forked from [a-fas/mt940][]. Originally inspired by [WoLpH/mt940][].
+
+
+
+[MT940]: https://www2.swift.com/knowledgecentre/publications/us9m_20190719/2.0?topic=mt940.htm
+[MT942]: https://www2.swift.com/knowledgecentre/publications/us9m_20190719/2.0?topic=mt942.htm
+[Centrapay]: https://centrapay.com/
+[Alexander Tsybulsky]: https://github.com/a-fas
+[a-fas/mt940]: https://github.com/a-fas/mt940js
+[WoLpH/mt940]: https://github.com/WoLpH/mt940
