@@ -298,15 +298,7 @@ exports[`Parser Full Examples test1.mt942 1`] = `
 Array [
   Statement {
     "accountIdentification": "123011050612305",
-    "creditFloorLimit": Object {
-      "amount": "0",
-      "currency": "NZD",
-    },
     "dateTimeIndication": 2020-05-20T22:17:00.000Z,
-    "debitFloorLimit": Object {
-      "amount": "0",
-      "currency": "NZD",
-    },
     "informationToAccountOwner": "",
     "number": Object {
       "section": "",
@@ -358,15 +350,7 @@ exports[`Parser Full Examples test2.mt942 1`] = `
 Array [
   Statement {
     "accountIdentification": "123011050612305",
-    "creditFloorLimit": Object {
-      "amount": "0",
-      "currency": "NZD",
-    },
     "dateTimeIndication": 2020-05-21T01:16:00.000Z,
-    "debitFloorLimit": Object {
-      "amount": "0",
-      "currency": "NZD",
-    },
     "informationToAccountOwner": "",
     "number": Object {
       "section": "",
