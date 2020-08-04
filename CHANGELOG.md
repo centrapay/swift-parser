@@ -8,13 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- support for mt942
+- support for MT942
 
 ### Removed
-- middleware support
+- parser middleware support
+- "withTags" parse option
+- Parser class not exposed from main module
 
 ### Changed
-- refactor the interface
+- parse method exposed in main module
+- parse method accepts opts object and returns Statement instances
 
 ## [0.2.0] - 2020-08-03
 
