@@ -1,7 +1,7 @@
 {
   "name": "@centrapay/swift-parser",
   "version": "1.0.0",
-  "description": "Swift financial message parser (MT940)",
+  "description": "Swift financial message parser (MT940, MT942)",
   "main": "index.js",
   "bin": {
     "swift-parse": "scripts/cli.js"
@@ -13,6 +13,7 @@
   },
   "keywords": [
     "mt940",
+    "mt942",
     "swift",
     "bank",
     "statement",
