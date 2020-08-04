@@ -16,6 +16,7 @@
 */
 
 const helpers = require('../lib/helperModels');
+const BigNumber = require('bignumber.js');
 
 describe('Helpers', () => {
   describe('Bank date parser', () => {
@@ -32,27 +33,27 @@ describe('Helpers', () => {
   describe('Bank amount', () => {
     describe('Parse', () => {
       it('should parse debit amount -> negative', () => {
-        expect(helpers.Amount.parse('D', '123.34')).toEqual(-123.34);
+        expect(helpers.Amount.parse('D', '123.34')).toEqual(BigNumber(-123.34));
       });
 
       it('should parse credit amount -> positive', () => {
-        expect(helpers.Amount.parse('C', '123.34')).toEqual(123.34);
+        expect(helpers.Amount.parse('C', '123.34')).toEqual(BigNumber(123.34));
       });
 
       it('should parse debit amount reversal -> positive', () => {
-        expect(helpers.Amount.parse('RD', '123.34')).toEqual(123.34);
+        expect(helpers.Amount.parse('RD', '123.34')).toEqual(BigNumber(123.34));
       });
 
       it('should parse credit amount reversal -> negative', () => {
-        expect(helpers.Amount.parse('RC', '123.34')).toEqual(-123.34);
+        expect(helpers.Amount.parse('RC', '123.34')).toEqual(BigNumber(-123.34));
       });
 
       it('should parse amount with ,', () => {
-        expect(helpers.Amount.parse('C', '123,34')).toEqual(123.34);
+        expect(helpers.Amount.parse('C', '123,34')).toEqual(BigNumber(123.34));
       });
 
       it('should round to 2 fractional digits', () => {
-        expect(helpers.Amount.parse('C', '123,345')).toEqual(123.35);
+        expect(helpers.Amount.parse('C', '123,345')).toEqual(BigNumber(123.35));
       });
 
       it('should fail if wrong indicator passed', () => {
@@ -76,12 +77,6 @@ describe('Helpers', () => {
       });
     });
 
-    describe('isEqual', () => {
-      it('Basic checks', () => {
-        expect(helpers.Amount.isEqual(123.23, 123.2301)).toBe(true);
-        expect(helpers.Amount.isEqual(123.23, 123.235)).toBe(false);
-      });
-    });
   });
 
 

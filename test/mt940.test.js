@@ -18,7 +18,7 @@
 const Tags    = require('../lib/tags');
 const helpers = require('../lib/helperModels');
 const mt940MsgType = require('../lib/mt940');
-
+const BigNumber = require('bignumber.js');
 function expectedStatement() {
   return {
     transactionReference:  'B4E08MS9D00A0009',
@@ -33,17 +33,17 @@ function expectedStatement() {
     openingBalanceDate: helpers.Date.parse('14', '05', '07'),
     closingBalanceDate: helpers.Date.parse('14', '05', '08'),
     currency:           'EUR',
-    openingBalance:     0.0,
-    closingBalance:     500.0,
+    openingBalance:     BigNumber(0.0),
+    closingBalance:     BigNumber(500.0),
     closingAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
     forwardAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
-    closingAvailableBalance:     500.0,
-    forwardAvailableBalance:     500.0,
+    closingAvailableBalance:     BigNumber(500.0),
+    forwardAvailableBalance:     BigNumber(500.0),
     informationToAccountOwner: '',
     messageBlocks: {},
     transactions: [
       {
-        amount:          500.00,
+        amount:          BigNumber(500.00),
         isReversal:      false,
         currency:        'EUR',
         reference:       'NONREF',
@@ -92,7 +92,7 @@ describe('MT940 Message Type', () => {
 
     let exp  = expectedStatement();
     exp.transactions.push({ // patch
-      amount: 0.00,
+      amount: BigNumber(0.00),
       currency: 'EUR',
       isReversal: false,
       reference: 'NONREF2',

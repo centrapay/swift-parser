@@ -21,6 +21,7 @@ const helpers = require('../lib/helperModels');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
+const BigNumber = require('bignumber.js');
 
 const DUMMY_STATEMENT_LINES = [
   ':20:B4E08MS9D00A0009',
@@ -98,17 +99,17 @@ function expectedMt940Statement() {
     openingBalanceDate: helpers.Date.parse('14', '05', '07'),
     closingBalanceDate: helpers.Date.parse('14', '05', '08'),
     currency:           'EUR',
-    openingBalance:     0.0,
-    closingBalance:     500.0,
+    openingBalance:     BigNumber(0.0),
+    closingBalance:     BigNumber(500.0),
     closingAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
     forwardAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
-    closingAvailableBalance:     500.0,
-    forwardAvailableBalance:     500.0,
+    closingAvailableBalance:     BigNumber(500.0),
+    forwardAvailableBalance:     BigNumber(500.0),
     informationToAccountOwner: '',
     messageBlocks: {},
     transactions: [
       {
-        amount:          500.00,
+        amount:          BigNumber(500.00),
         isReversal:      false,
         currency:        'EUR',
         reference:       'NONREF',
@@ -253,8 +254,8 @@ describe('Parser', () => {
       // patch data
       exp.closingAvailableBalanceDate = helpers.Date.parse('14', '05', '09');
       exp.forwardAvailableBalanceDate = helpers.Date.parse('14', '05', '10');
-      exp.closingAvailableBalance     = 600.0;
-      exp.forwardAvailableBalance     = 700.0;
+      exp.closingAvailableBalance     = BigNumber(600.0);
+      exp.forwardAvailableBalance     = BigNumber(700.0);
       exp.transactions[0].extraDetails = 'SUPPLEMENTARY61';
       exp.informationToAccountOwner = 'statement\ncomment';
 
@@ -349,17 +350,17 @@ describe('Parser', () => {
         openingBalanceDate: helpers.Date.parse('14', '05', '07'),
         closingBalanceDate: helpers.Date.parse('14', '05', '08'),
         currency:           'EUR',
-        openingBalance:     0.0,
-        closingBalance:     600.0,
+        openingBalance:     BigNumber(0.0),
+        closingBalance:     BigNumber(600.0),
         closingAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
         forwardAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
-        closingAvailableBalance:     600.0,
-        forwardAvailableBalance:     600.0,
+        closingAvailableBalance:     BigNumber(600.0),
+        forwardAvailableBalance:     BigNumber(600.0),
         informationToAccountOwner: '',
         messageBlocks: {},
         transactions: [
           {
-            amount:          100.00,
+            amount:          BigNumber(100.00),
             isReversal:      false,
             currency:        'EUR',
             reference:       'NONREF',
@@ -372,7 +373,7 @@ describe('Parser', () => {
             fundsCode:       '',
           },
           {
-            amount:          200.00,
+            amount:          BigNumber(200.00),
             isReversal:      false,
             currency:        'EUR',
             reference:       'NONREF',
@@ -386,7 +387,7 @@ describe('Parser', () => {
             nonSwift:        'Hello world',
           },
           {
-            amount:          300.00,
+            amount:          BigNumber(300.00),
             isReversal:      false,
             currency:        'EUR',
             reference:       'NONREF',
