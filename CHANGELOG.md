@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - parse method exposed in main module
 - parse method accepts opts object and returns Statement instances
 - parse method does not validate by default
+- numbers returned as BigNumber
 
 ## [0.2.0] - 2020-08-03
 
