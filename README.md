@@ -19,9 +19,9 @@ const statements = parser.parse({
   data: fs.readFileSync(path, 'utf8'),
 });
 
-statements.forEach(statement => {
-  console.log(statement.accountIdentification, statement.number.statement);
-  statement.transactions.forEach(txn => {
+statements.forEach(stmt => {
+  console.log(stmt.statementDate, stmt.accountIdentification, stmt.number.statement);
+  stmt.transactions.forEach(txn => {
     console.log(txn.amount, txn.currency);
   };
 };
@@ -71,6 +71,7 @@ are additionally validated for:
 | number.statement            | string    | tag 28 main statement number                                               |
 | number.sequence             | string    | tag 28 statement sub number (sequence)                                     |
 | number.section              | string    | tag 28 statement sub sub number (present on some banks)                    |
+| statementDate               | Date      | tag 62 (MT940, day precision) or tag 13D (MT942, minute precision)         |
 | openingBalanceDate          | Date      | tag 60 statement opening date                                              |
 | closingBalanceDate          | Date      | tag 62 statement closing date                                              |
 | closingAvailableBalanceDate | Date      | tag 64 closing available balance date, default = closing date              |

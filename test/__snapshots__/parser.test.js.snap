@@ -21,6 +21,7 @@ Array [
     "openingBalance": "3503.6",
     "openingBalanceDate": 2017-01-01T00:00:00.000Z,
     "relatedReference": undefined,
+    "statementDate": 2017-01-24T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
       Transaction {
@@ -93,6 +94,7 @@ UL. SPOKOJNA 3",
     "openingBalance": "2996.53",
     "openingBalanceDate": 2017-01-24T00:00:00.000Z,
     "relatedReference": undefined,
+    "statementDate": 2017-01-31T00:00:00.000Z,
     "transactionReference": "17013109020",
     "transactions": Array [
       Transaction {
@@ -189,6 +191,7 @@ Array [
     "openingBalance": "0",
     "openingBalanceDate": 2014-05-07T00:00:00.000Z,
     "relatedReference": undefined,
+    "statementDate": 2014-05-08T00:00:00.000Z,
     "transactionReference": "B4E08MS9D00A0009",
     "transactions": Array [
       Transaction {
@@ -235,6 +238,7 @@ WANT DAT IS ZOALS DE NEDERLANDSE BANKEN COMMUNICEREN",
     "openingBalance": "3058.98",
     "openingBalanceDate": 2014-07-29T00:00:00.000Z,
     "relatedReference": undefined,
+    "statementDate": 2014-07-30T00:00:00.000Z,
     "transactionReference": "B4G30MS9D00A003D",
     "transactions": Array [
       Transaction {
@@ -298,14 +302,31 @@ exports[`Parser Full Examples test1.mt942 1`] = `
 Array [
   Statement {
     "accountIdentification": "123011050612305",
-    "dateTimeIndication": 2020-05-20T22:17:00.000Z,
+    "closingAvailableBalance": undefined,
+    "closingAvailableBalanceDate": undefined,
+    "closingBalance": undefined,
+    "closingBalanceDate": undefined,
+    "currency": undefined,
+    "forwardAvailableBalance": undefined,
+    "forwardAvailableBalanceDate": undefined,
     "informationToAccountOwner": "",
+    "messageBlocks": Object {
+      "1": Object {
+        "value": "F01ASBBNZ2AAXXX0000000001",
+      },
+      "2": Object {
+        "value": "I942ASBBNZ2AXXXXN",
+      },
+    },
     "number": Object {
       "section": "",
       "sequence": "1",
       "statement": "17",
     },
+    "openingBalance": undefined,
+    "openingBalanceDate": undefined,
     "relatedReference": undefined,
+    "statementDate": 2020-05-20T22:17:00.000Z,
     "transactionReference": "FNB5014200017001",
     "transactions": Array [
       Transaction {
@@ -350,14 +371,31 @@ exports[`Parser Full Examples test2.mt942 1`] = `
 Array [
   Statement {
     "accountIdentification": "123011050612305",
-    "dateTimeIndication": 2020-05-21T01:16:00.000Z,
+    "closingAvailableBalance": undefined,
+    "closingAvailableBalanceDate": undefined,
+    "closingBalance": undefined,
+    "closingBalanceDate": undefined,
+    "currency": undefined,
+    "forwardAvailableBalance": undefined,
+    "forwardAvailableBalanceDate": undefined,
     "informationToAccountOwner": "",
+    "messageBlocks": Object {
+      "1": Object {
+        "value": "F01ASBBNZ2AAXXX0000000001",
+      },
+      "2": Object {
+        "value": "I942ASBBNZ2AXXXXN",
+      },
+    },
     "number": Object {
       "section": "",
       "sequence": "1",
       "statement": "18",
     },
+    "openingBalance": undefined,
+    "openingBalanceDate": undefined,
     "relatedReference": "GNHD99KKSLL99001",
+    "statementDate": 2020-05-21T01:16:00.000Z,
     "transactionReference": "FNB5014200018001",
     "transactions": Array [
       Transaction {
@@ -446,6 +484,7 @@ Array [
     "openingBalance": "0",
     "openingBalanceDate": 2014-05-07T00:00:00.000Z,
     "relatedReference": undefined,
+    "statementDate": 2014-05-08T00:00:00.000Z,
     "transactionReference": "B4E08MS9D00A0009",
     "transactions": Array [
       Transaction {
@@ -498,6 +537,7 @@ BIC:XXXXDK22",
     "openingBalance": "3058.98",
     "openingBalanceDate": 2014-07-29T00:00:00.000Z,
     "relatedReference": undefined,
+    "statementDate": 2014-07-30T00:00:00.000Z,
     "transactionReference": "B4G30MS9D00A003D",
     "transactions": Array [
       Transaction {
