@@ -18,13 +18,22 @@
 
 'use strict';
 
+const path = require('path');
+
 function showHelp() {
-  console.log(`Usage: ${process.argv[1]} [options] <filename>
+  console.log(`Usage: ${path.parse(process.argv[1]).base} [options] <filename>
 
   Parse a Swift input file and output as JSON.
 
   Options:
+
     --help, -h    Show help
+
+    --type, -t    Set input file type.
+
+                  Valid: mt940
+
+                  Default: File extension or mt940
 `);
 }
 
@@ -33,25 +42,46 @@ function errorExit(e) {
   process.exit(1);
 }
 
-const argv = process.argv.slice(2);
+let argv = process.argv.slice(2);
 let file = null;
+let type = null;
 
-argv.forEach(arg => {
+function validateType(s) {
+  if (['mt940'].includes(s)) {
+    return s;
+  }
+  return undefined;
+}
+
+while(argv.length) {
+  const arg = argv[0];
   switch (arg) {
   case '--help':
   case '-h':
     showHelp();
     process.exit();
     break;
+  case '--type':
+  case '-t':
+    type = argv[1];
+    argv = argv.slice(1);
+    break;
   default:
     file = arg;
-    break;
   }
-});
+  argv = argv.slice(1);
+}
 
 if (!file) {
   errorExit('Missing required arg: filename');
 }
+
+if (type && !validateType(type)) {
+  errorExit(`Invalid type: ${type}`);
+}
+
+const suffix = file.split('.').pop().toLowerCase();
+type = type || validateType(suffix) || 'mt940';
 
 async function main() {
   const fs = require('fs');
