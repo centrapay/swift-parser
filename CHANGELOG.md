@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - parser middleware support
 - "withTags" parse option
 - Parser class not exposed from main module
+- Statement.statementDate
 
 ### Changed
 - parse method exposed in main module

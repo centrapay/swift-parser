@@ -29,7 +29,6 @@ function expectedStatement() {
       sequence:  '1',
       section:   ''
     },
-    statementDate:      helpers.Date.parse('14', '05', '08'),
     openingBalanceDate: helpers.Date.parse('14', '05', '07'),
     closingBalanceDate: helpers.Date.parse('14', '05', '08'),
     currency:           'EUR',

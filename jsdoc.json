@@ -4,7 +4,7 @@
     "includePattern": ".+\\.js(doc)?$"
   },
   "opts": {
-    "destination": "./doc/",
+    "destination": "./docs/",
     "readme": "./README.md"
   }
 }

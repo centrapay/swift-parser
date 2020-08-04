@@ -17,12 +17,37 @@
 
 /**
  * MT940 parser
- * @module swift-parser
+ * @module @centrapay/swift-parser
  */
 
 const Parser  = require('./lib/parser');
 const parser = new Parser();
 
 module.exports = {
+
+  /**
+   * Parse a SWIFT MT940 or MT942 statement message.
+   *
+   * @function
+   * @param {object} opts
+   * @param {string} opts.data - SWIFT message
+   * @param {string} opts.type - message format: mt940 or mt942
+   * @param {boolean} [opts.validate=false] - check for semantic errors
+   * @returns {array<Statement>} Array of statements
+   *
+   * @example
+   * const parser = require('@centrapay/swift-parser');
+   * const statements = parser.parse({
+   *   type: 'mt940',
+   *   data: fs.readFileSync(path, 'utf8'),
+   * });
+   *
+   * statements.forEach(statement => {
+   *   console.log(statement.accountIdentification, statement.number.statement);
+   *   statement.transactions.forEach(txn => {
+   *     console.log(txn.amount, txn.currency);
+   *   };
+   * };
+   */
   parse: parser.parse.bind(parser),
 };
