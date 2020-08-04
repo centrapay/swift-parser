@@ -157,12 +157,12 @@ describe('Parser', () => {
       const example = fs.readFileSync(path.resolve(__dirname, examplePath), 'utf-8');
 
       test(`${examplePath} statements`, () => {
-        const statements = new Parser().parse({ data: example });
+        const statements = new Parser().parse({ data: example, type: 'mt940' });
         expect(statements).toMatchSnapshot();
       });
 
       test(`${examplePath} transaction computed state`, () => {
-        const statements = new Parser().parse({ data: example });
+        const statements = new Parser().parse({ data: example, type: 'mt940' });
         const transactions = statements
           .flatMap(s => s.transactions)
           .map(t => {
@@ -184,6 +184,11 @@ describe('Parser', () => {
         expect(result).toMatchSnapshot();
       });
     });
+  });
+
+  it('parse fails if type is not valid', () =>{
+    const parser = new Parser();
+    expect(()=> parser.parse({ data: '', type: 'invalid-type'})).toThrow('"invalid-type" is not a valid file type');
   });
 
   describe('Parser methods', () => {
@@ -221,14 +226,14 @@ describe('Parser', () => {
   describe('Integration test', () => {
     it('typical statement', () => {
       const parser = new Parser();
-      const result = parser.parse({ data: DUMMY_STATEMENT_LINES.join('\n') });
+      const result = parser.parse({ data: DUMMY_STATEMENT_LINES.join('\n'), type: 'mt940' });
       expect(result.length).toEqual(1);
       expect(result[0]).toEqual(expectedMt940Statement());
     });
 
     it('statement with structured 86', () => {
       let parser = new Parser();
-      let result = parser.parse({ data: DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n') });
+      let result = parser.parse({ data: DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n'), type: 'mt940' });
       expect(result.length).toEqual(1);
 
       const exp = expectedMt940Statement();
@@ -241,7 +246,7 @@ describe('Parser', () => {
       expect(result[0]).toEqual(exp);
 
       parser = new Parser();
-      result = parser.parse({ with86Structure: false, data: DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n') });
+      result = parser.parse({ with86Structure: false, data: DUMMY_STATEMENT_LINES_WITH_STRUCTURE.join('\n'), type: 'mt940'});
       delete exp.transactions[0].structuredDetails;
       expect(result[0]).toEqual(exp);
     });
@@ -258,7 +263,7 @@ describe('Parser', () => {
       exp.transactions[0].extraDetails = 'SUPPLEMENTARY61';
       exp.informationToAccountOwner = 'statement\ncomment';
 
-      const result = parser.parse({ data: DUMMY_STATEMENT_LINES_61_64_65.join('\n') });
+      const result = parser.parse({ data: DUMMY_STATEMENT_LINES_61_64_65.join('\n'), type: 'mt940' });
       expect(result.length).toEqual(1);
       expect(result[0]).toEqual(exp);
     });
@@ -283,7 +288,7 @@ describe('Parser', () => {
       exp2.number.sequence    = '2';
       exp2.transactions       = [];
 
-      const result = parser.parse({ data: DUMMY_STATEMENT_W_MESSAGE_BLOCKS.join('\n') });
+      const result = parser.parse({ data: DUMMY_STATEMENT_W_MESSAGE_BLOCKS.join('\n'), type: 'mt940' });
       expect(result.length).toEqual(2);
       expect(result[0]).toEqual(exp1);
       expect(result[1]).toEqual(exp2);
@@ -334,7 +339,7 @@ describe('Parser', () => {
 
     it('statement with NS', () => {
       const parser = new Parser();
-      const result = parser.parse({ data: DUMMY_STATEMENT_LINES_WITH_NS.join('\n') });
+      const result = parser.parse({ data: DUMMY_STATEMENT_LINES_WITH_NS.join('\n'), type: 'mt940' });
       expect(result.length).toEqual(1);
       expect(result[0]).toEqual({
         transactionReference:  'B4E08MS9D00A0009',
