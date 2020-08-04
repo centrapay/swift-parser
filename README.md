@@ -145,7 +145,7 @@ See [Changelog](./CHANGELOG.md)
 
 ## Legal
 
-Copyright © 2015 [Alexander Tsybulsky][] and Copyright © 2020 [Centrapay][].
+Copyright © 2015 [Alexander Tsybulsky][] and other contributors. Copyright © 2020 [Centrapay][].
 
 This software is licensed under Apache-2.0 License. Please see [LICENSE](/LICENSE) for details.
 
