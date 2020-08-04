@@ -107,10 +107,6 @@ describe('MT940 Message Type', () => {
     expect(result).toEqual(exp);
     expect(result.tags).not.toBeDefined();
     expect(result.structuredDetails).not.toBeDefined();
-
-    // with Tags
-    result = mt940MsgType.buildStatement({ group, withTags: true });
-    expect(result.tags).toEqual(group);
   });
 
   it('buildStatement structured', () => {
