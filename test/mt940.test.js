@@ -51,7 +51,7 @@ function expectedStatement() {
         transactionType: 'NTRF',
         date:            helpers.Date.parse('14', '05', '07'),
         entryDate:       helpers.Date.parse('14', '05', '07'),
-        details:         'LINE1\nLINE2',
+        detailSegments: [ 'LINE1\nLINE2' ],
         extraDetails:    '',
         fundsCode:       '',
       }
@@ -100,7 +100,7 @@ describe('MT940 Message Type', () => {
       transactionType: 'NTRF',
       date: helpers.Date.parse('14', '05', '07'),
       entryDate: helpers.Date.parse('14', '05', '07'),
-      details: 'LINE1',
+      detailSegments: [ 'LINE1' ],
       extraDetails: '',
       fundsCode: '',
     });
