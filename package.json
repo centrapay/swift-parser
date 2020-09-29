@@ -29,7 +29,7 @@
     "jsdoc": "^3.6.6"
   },
   "dependencies": {
-    "bignumber.js": "^9.0.0",
+    "bignumber.js": "^9.0.1",
     "moment": "^2.29.0"
   }
 }
