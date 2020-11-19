@@ -87,39 +87,39 @@ const DUMMY_STATEMENT_W_MESSAGE_BLOCKS = [
 
 function expectedMt940Statement() {
   return {
-    transactionReference:  'B4E08MS9D00A0009',
-    relatedReference:      'X',
+    transactionReference: 'B4E08MS9D00A0009',
+    relatedReference: 'X',
     accountIdentification: '123456789',
     number: {
       statement: '123',
-      sequence:  '1',
-      section:   ''
+      sequence: '1',
+      section: ''
     },
     statementDate: helpers.Date.parse('14', '05', '08'),
     openingBalanceDate: helpers.Date.parse('14', '05', '07'),
     closingBalanceDate: helpers.Date.parse('14', '05', '08'),
-    currency:           'EUR',
-    openingBalance:     BigNumber(0.0),
-    closingBalance:     BigNumber(500.0),
+    currency: 'EUR',
+    openingBalance: BigNumber(0.0),
+    closingBalance: BigNumber(500.0),
     closingAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
     forwardAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
-    closingAvailableBalance:     BigNumber(500.0),
-    forwardAvailableBalance:     BigNumber(500.0),
+    closingAvailableBalance: BigNumber(500.0),
+    forwardAvailableBalance: BigNumber(500.0),
     informationToAccountOwner: '',
     messageBlocks: {},
     transactions: [
       {
-        amount:          BigNumber(500.00),
-        isReversal:      false,
-        currency:        'EUR',
-        reference:       'NONREF',
-        bankReference:   'AUXREF',
+        amount: BigNumber(500.00),
+        isReversal: false,
+        currency: 'EUR',
+        reference: 'NONREF',
+        bankReference: 'AUXREF',
         transactionType: 'NTRF',
-        date:            helpers.Date.parse('14', '05', '07'),
-        entryDate:       helpers.Date.parse('14', '05', '07'),
+        date: helpers.Date.parse('14', '05', '07'),
+        entryDate: helpers.Date.parse('14', '05', '07'),
         detailSegments: [ 'LINE1\nLINE2' ],
-        extraDetails:    '',
-        fundsCode:       '',
+        extraDetails: '',
+        fundsCode: '',
       }
     ]};
 }
@@ -187,9 +187,9 @@ describe('Parser', () => {
     });
   });
 
-  it('parse fails if type is not valid', () =>{
+  it('parse fails if type is not valid', () => {
     const parser = new Parser();
-    expect(()=> parser.parse({ data: '', type: 'invalid-type'})).toThrow('"invalid-type" is not a valid file type');
+    expect(() => parser.parse({ data: '', type: 'invalid-type'})).toThrow('"invalid-type" is not a valid file type');
   });
 
   describe('Parser methods', () => {
@@ -343,67 +343,67 @@ describe('Parser', () => {
       const result = parser.parse({ data: DUMMY_STATEMENT_LINES_WITH_NS.join('\n'), type: 'mt940' });
       expect(result.length).toEqual(1);
       expect(result[0]).toEqual({
-        transactionReference:  'B4E08MS9D00A0009',
-        relatedReference:      'X',
+        transactionReference: 'B4E08MS9D00A0009',
+        relatedReference: 'X',
         accountIdentification: '123456789',
         number: {
           statement: '123',
-          sequence:  '1',
-          section:   ''
+          sequence: '1',
+          section: ''
         },
         statementDate: helpers.Date.parse('14', '05', '08'),
         openingBalanceDate: helpers.Date.parse('14', '05', '07'),
         closingBalanceDate: helpers.Date.parse('14', '05', '08'),
-        currency:           'EUR',
-        openingBalance:     BigNumber(0.0),
-        closingBalance:     BigNumber(600.0),
+        currency: 'EUR',
+        openingBalance: BigNumber(0.0),
+        closingBalance: BigNumber(600.0),
         closingAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
         forwardAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
-        closingAvailableBalance:     BigNumber(600.0),
-        forwardAvailableBalance:     BigNumber(600.0),
+        closingAvailableBalance: BigNumber(600.0),
+        forwardAvailableBalance: BigNumber(600.0),
         informationToAccountOwner: '',
         messageBlocks: {},
         transactions: [
           {
-            amount:          BigNumber(100.00),
-            isReversal:      false,
-            currency:        'EUR',
-            reference:       'NONREF',
-            bankReference:   'AUXREF',
+            amount: BigNumber(100.00),
+            isReversal: false,
+            currency: 'EUR',
+            reference: 'NONREF',
+            bankReference: 'AUXREF',
             transactionType: 'NTRF',
-            date:            helpers.Date.parse('14', '05', '07'),
-            entryDate:       helpers.Date.parse('14', '05', '07'),
+            date: helpers.Date.parse('14', '05', '07'),
+            entryDate: helpers.Date.parse('14', '05', '07'),
             detailSegments: [ 'LINE1' ],
-            extraDetails:    '',
-            fundsCode:       '',
+            extraDetails: '',
+            fundsCode: '',
           },
           {
-            amount:          BigNumber(200.00),
-            isReversal:      false,
-            currency:        'EUR',
-            reference:       'NONREF',
-            bankReference:   'AUXREF',
+            amount: BigNumber(200.00),
+            isReversal: false,
+            currency: 'EUR',
+            reference: 'NONREF',
+            bankReference: 'AUXREF',
             transactionType: 'NTRF',
-            date:            helpers.Date.parse('14', '05', '07'),
-            entryDate:       helpers.Date.parse('14', '05', '07'),
+            date: helpers.Date.parse('14', '05', '07'),
+            entryDate: helpers.Date.parse('14', '05', '07'),
             detailSegments: [ 'LINE2' ],
-            extraDetails:    '',
-            fundsCode:       '',
-            nonSwift:        'Hello world',
+            extraDetails: '',
+            fundsCode: '',
+            nonSwift: 'Hello world',
           },
           {
-            amount:          BigNumber(300.00),
-            isReversal:      false,
-            currency:        'EUR',
-            reference:       'NONREF',
-            bankReference:   'AUXREF',
+            amount: BigNumber(300.00),
+            isReversal: false,
+            currency: 'EUR',
+            reference: 'NONREF',
+            bankReference: 'AUXREF',
             transactionType: 'NTRF',
-            date:            helpers.Date.parse('14', '05', '07'),
-            entryDate:       helpers.Date.parse('14', '05', '07'),
+            date: helpers.Date.parse('14', '05', '07'),
+            entryDate: helpers.Date.parse('14', '05', '07'),
             detailSegments: [ 'LINE3' ],
-            extraDetails:    '',
-            fundsCode:       '',
-            nonSwift:        'Hello\nbank info',
+            extraDetails: '',
+            fundsCode: '',
+            nonSwift: 'Hello\nbank info',
           },
         ]});
     });

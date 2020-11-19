@@ -69,7 +69,7 @@ describe('Field86Structure', () => {
 
   it('Detects /XXX/ structure', () => {
     expect(run('/ATR/Details 123/ATR2/123232421/ATR3/')).toEqual({
-      'ATR':  'Details 123',
+      'ATR': 'Details 123',
       'ATR2': '123232421',
       'ATR3': ''
     });
@@ -91,7 +91,7 @@ describe('Field86Structure', () => {
       'XXXX': '/100924006010 XXXXXXXXXXXXX XXXXXXXX XXXXXX AB (PUBL) ',
       'ORDP': 'XX XXXXXX XXXXX XXXX N.A.25 XXXX XXXXX, CANARY WHARF ',
       'REMI': 'UBERWEISUNG OUR REF: 03MT181024144353YOUR REF: P6363103 240 1   M CA O/XXXXGB2L',
-      'ACC':  'INST/XXXXGB2L         /6231400604BIC:XXXXGB2L'
+      'ACC': 'INST/XXXXGB2L         /6231400604BIC:XXXXGB2L'
     });
   });
 });

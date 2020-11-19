@@ -16,7 +16,7 @@
 *  limitations under the License.
 */
 
-'use strict';
+
 
 function errorExit(e) {
   console.error(e);
