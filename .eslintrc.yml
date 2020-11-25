@@ -1,0 +1,36 @@
+parserOptions:
+  ecmaVersion: 2019
+  sourceType: module
+
+env:
+  browser: true
+  jest: true
+  node: true
+  mocha: true
+  es6: true
+
+extends:
+- eslint:recommended
+
+# when updating, please copy to other projects <3
+# code */.eslintrc.yml
+rules:
+  arrow-spacing: error
+  complexity: [ error, 6 ]
+  curly: [ error, all ]
+  indent: [ error, 2 ]
+  key-spacing: [ error, { beforeColon: false } ]
+  linebreak-style: [ error, unix ]
+  no-console: [ error ]
+  no-process-exit: off
+  no-trailing-spaces: [ error ]
+  quotes: [ error, single ]
+  semi: [ error, always ]
+  space-infix-ops: [ error ]
+  strict: [ error, "global" ]
+
+overrides:
+  - files: [ "**/scripts/**" ]
+    rules:
+      # Allow stdout in scripts
+      no-console: ["error", { allow: ["log", "warn", "error"] }]

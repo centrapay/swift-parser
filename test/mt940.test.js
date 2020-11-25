@@ -21,39 +21,39 @@ const mt940MsgType = require('../lib/mt940');
 const BigNumber = require('bignumber.js');
 function expectedStatement() {
   return {
-    transactionReference:  'B4E08MS9D00A0009',
-    relatedReference:      'X',
+    transactionReference: 'B4E08MS9D00A0009',
+    relatedReference: 'X',
     accountIdentification: '123456789',
     number: {
       statement: '123',
-      sequence:  '1',
-      section:   ''
+      sequence: '1',
+      section: ''
     },
     statementDate: helpers.Date.parse('14', '05', '08'),
     openingBalanceDate: helpers.Date.parse('14', '05', '07'),
     closingBalanceDate: helpers.Date.parse('14', '05', '08'),
-    currency:           'EUR',
-    openingBalance:     BigNumber(0.0),
-    closingBalance:     BigNumber(500.0),
+    currency: 'EUR',
+    openingBalance: BigNumber(0.0),
+    closingBalance: BigNumber(500.0),
     closingAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
     forwardAvailableBalanceDate: helpers.Date.parse('14', '05', '08'),
-    closingAvailableBalance:     BigNumber(500.0),
-    forwardAvailableBalance:     BigNumber(500.0),
+    closingAvailableBalance: BigNumber(500.0),
+    forwardAvailableBalance: BigNumber(500.0),
     informationToAccountOwner: '',
     messageBlocks: {},
     transactions: [
       {
-        amount:          BigNumber(500.00),
-        isReversal:      false,
-        currency:        'EUR',
-        reference:       'NONREF',
-        bankReference:   'AUXREF',
+        amount: BigNumber(500.00),
+        isReversal: false,
+        currency: 'EUR',
+        reference: 'NONREF',
+        bankReference: 'AUXREF',
         transactionType: 'NTRF',
-        date:            helpers.Date.parse('14', '05', '07'),
-        entryDate:       helpers.Date.parse('14', '05', '07'),
+        date: helpers.Date.parse('14', '05', '07'),
+        entryDate: helpers.Date.parse('14', '05', '07'),
         detailSegments: [ 'LINE1\nLINE2' ],
-        extraDetails:    '',
-        fundsCode:       '',
+        extraDetails: '',
+        fundsCode: '',
       }
     ]};
 }

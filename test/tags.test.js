@@ -56,7 +56,7 @@ describe('Tags', () => {
       expect(tag.fields.amount).toEqual(BigNumber('123'));
     });
 
-    it('should create tag 34F (DebitAndCreditFloorLimitIndicator) With DC mark', ()=>{
+    it('should create tag 34F (DebitAndCreditFloorLimitIndicator) With DC mark', () => {
       const str = 'AAAD123';
       const tag = tf.createTag('34F', null, str);
       expect(tag.fields.currency).toEqual('AAA');
