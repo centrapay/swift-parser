@@ -2,6 +2,9 @@ parserOptions:
   ecmaVersion: 2019
   sourceType: module
 
+plugins:
+  - "no-only-tests"
+
 env:
   browser: true
   jest: true
@@ -28,6 +31,7 @@ rules:
   semi: [ error, always ]
   space-infix-ops: [ error ]
   strict: [ error, "global" ]
+  no-only-tests/no-only-tests: [ error ]
 
 overrides:
   - files: [ "**/scripts/**" ]
