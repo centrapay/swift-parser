@@ -27,7 +27,7 @@
     "eslint": "^8.11.0",
     "eslint-plugin-no-only-tests": "^2.6.0",
     "jest": "^27.5.1",
-    "jsdoc": "^3.6.10"
+    "jsdoc": "^3.6.11"
   },
   "dependencies": {
     "bignumber.js": "^9.0.2",
