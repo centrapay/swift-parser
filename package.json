@@ -24,7 +24,7 @@
   "homepage": "https://github.com/centrapay/swift-parser",
   "repository": "https://github.com/centrapay/swift-parser.git",
   "devDependencies": {
-    "eslint": "^8.35.0",
+    "eslint": "^8.37.0",
     "eslint-plugin-no-only-tests": "^3.1.0",
     "jest": "^27.5.1",
     "jsdoc": "^4.0.2"
