@@ -14,6 +14,8 @@ npm install @centrapay/swift-parser
 
 ```javascript
 const parser = require('@centrapay/swift-parser');
+const fs = require('fs');
+
 const statements = parser.parse({
   type: 'mt940',
   data: fs.readFileSync(path, 'utf8'),
@@ -23,8 +25,8 @@ statements.forEach(stmt => {
   console.log(stmt.statementDate, stmt.accountIdentification, stmt.number.statement);
   stmt.transactions.forEach(txn => {
     console.log(txn.amount, txn.currency);
-  };
-};
+  });
+});
 ```
 
 
