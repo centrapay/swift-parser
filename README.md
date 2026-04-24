@@ -110,7 +110,7 @@ are additionally validated for:
 The `transaction.structuredDetails` attribute can be used to access structured
 data from statement transaction details (SWIFT "86" tag).  The following
 structured detail formats are supported:
-- `'<sep>DD'`, where `<sep>` can be `'>'` or `'?'` and `DD` is two digits
+- `'<sep>DD'`, where `<sep>` can be `'>'`, `'<'` or `'?'` and `DD` is two digits
 - `'/TAG/value'`, where `TAG` is 2 to 4 uppercase chars.
 
 **Example**
