@@ -45,6 +45,7 @@ function expectedStatement() {
       {
         amount: BigNumber(500.00),
         isReversal: false,
+        isExpected: false,
         currency: 'EUR',
         reference: 'NONREF',
         bankReference: 'AUXREF',
@@ -95,6 +96,7 @@ describe('MT940 Message Type', () => {
       amount: BigNumber(0.00),
       currency: 'EUR',
       isReversal: false,
+      isExpected: false,
       reference: 'NONREF2',
       bankReference: '',
       transactionType: 'NTRF',

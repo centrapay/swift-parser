@@ -111,6 +111,7 @@ function expectedMt940Statement() {
       {
         amount: BigNumber(500.00),
         isReversal: false,
+        isExpected: false,
         currency: 'EUR',
         reference: 'NONREF',
         bankReference: 'AUXREF',
@@ -367,6 +368,7 @@ describe('Parser', () => {
           {
             amount: BigNumber(100.00),
             isReversal: false,
+            isExpected: false,
             currency: 'EUR',
             reference: 'NONREF',
             bankReference: 'AUXREF',
@@ -380,6 +382,7 @@ describe('Parser', () => {
           {
             amount: BigNumber(200.00),
             isReversal: false,
+            isExpected: false,
             currency: 'EUR',
             reference: 'NONREF',
             bankReference: 'AUXREF',
@@ -394,6 +397,7 @@ describe('Parser', () => {
           {
             amount: BigNumber(300.00),
             isReversal: false,
+            isExpected: false,
             currency: 'EUR',
             reference: 'NONREF',
             bankReference: 'AUXREF',

@@ -152,6 +152,24 @@ describe('Tags', () => {
       expect(tag.fields.fundsCode).toEqual('R');
     });
 
+    it('should create tag 61 / expected credit (EC)', () => {
+      const str = '1605070507EC123,89NTRFNONREF//B4E07XM00J000023';
+      const tag = tf.createTag('61', null, str);
+      expect(tag.fields.amount).toEqual(BigNumber(123.89)); // Expected credit = positive
+      expect(tag.fields.transactionType).toEqual('NTRF');
+      expect(tag.fields.isExpected).toEqual(true);
+      expect(tag.fields.isReversal).toEqual(false);
+    });
+
+    it('should create tag 61 / expected debit (ED)', () => {
+      const str = '1605070507ED123,89NTRFNONREF//B4E07XM00J000023';
+      const tag = tf.createTag('61', null, str);
+      expect(tag.fields.amount).toEqual(BigNumber(-123.89)); // Expected debit = negative
+      expect(tag.fields.transactionType).toEqual('NTRF');
+      expect(tag.fields.isExpected).toEqual(true);
+      expect(tag.fields.isReversal).toEqual(false);
+    });
+
     it('should create tag 61 (with extraDetails)', () => {
       const str = '1605070507D123,89NTRFNONREF//B4E07XM00J000023\nSUPPLEMENTARY_DETAILS';
       const tag = tf.createTag('61', null, str);
