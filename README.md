@@ -93,6 +93,7 @@ are additionally validated for:
 | date              | Date      | transaction date                                                       |
 | amount            | BigNumber | transaction amount (with sign, Credit+, Debit-)                        |
 | reversal          | Boolean   | transaction is a reversal                                              |
+| isExpected        | Boolean   | transaction is an expected entry (field 61 `EC`/`ED` debit/credit mark)|
 | currency          | string    | transaction currency (copy of statement currency)                      |
 | details           | string    | content of relevant 86 tag(s), may be multiline (`\n` separated)       |
 | transactionType   | string    | MT940 transaction type code (e.g. NTRF ...)                            |

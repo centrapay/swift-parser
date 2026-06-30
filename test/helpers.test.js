@@ -48,6 +48,14 @@ describe('Helpers', () => {
         expect(helpers.Amount.parse('RC', '123.34')).toEqual(BigNumber(-123.34));
       });
 
+      it('should parse expected credit -> positive', () => {
+        expect(helpers.Amount.parse('EC', '123.34')).toEqual(BigNumber(123.34));
+      });
+
+      it('should parse expected debit -> negative', () => {
+        expect(helpers.Amount.parse('ED', '123.34')).toEqual(BigNumber(-123.34));
+      });
+
       it('should parse amount with ,', () => {
         expect(helpers.Amount.parse('C', '123,34')).toEqual(BigNumber(123.34));
       });
