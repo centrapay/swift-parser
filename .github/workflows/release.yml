@@ -22,16 +22,18 @@ jobs:
   build:
     name: Create Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: '24.x'
           registry-url: 'https://registry.npmjs.org'
+      - run: npm install -g npm@^11.5.1
       - run: yarn install
       - run: scripts/version-tag-validate.js ${{ github.ref }}
       - run: yarn test --ci
       - run: yarn lint
       - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
