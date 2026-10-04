@@ -32,7 +32,7 @@ jobs:
           node-version: '24.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install -g npm@^11.5.1
-      - run: yarn install
+      - run: yarn install --immutable
       - run: scripts/version-tag-validate.js ${{ github.ref }}
       - run: yarn test --ci
       - run: yarn lint
