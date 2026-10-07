@@ -39,7 +39,7 @@ jobs:
       - run: yarn lint
 
   checks:
-    if: always()
+    if: ${{ always() && github.ref != 'refs/heads/master' }}
     needs: [ test-and-lint ]
     timeout-minutes: 5
     runs-on: ubuntu-latest
