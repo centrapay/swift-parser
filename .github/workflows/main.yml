@@ -22,9 +22,11 @@ on:
   pull_request:
     branches:
       - master
+  merge_group:
 
 jobs:
   test-and-lint:
+    if: github.ref != 'refs/heads/master'
     name: Test and lint
     runs-on: ubuntu-latest
     steps:
@@ -35,3 +37,13 @@ jobs:
       - run: yarn install --immutable
       - run: yarn test --ci
       - run: yarn lint
+
+  checks:
+    if: always()
+    needs: [ test-and-lint ]
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if any required job failed or was cancelled
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: exit 1
