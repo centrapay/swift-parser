@@ -455,7 +455,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@centrapay/swift-parser@workspace:."
   dependencies:
-    bignumber.js: "npm:^9.1.1"
+    bignumber.js: "npm:^11.0.0"
     eslint: "npm:^8.35.0"
     eslint-plugin-no-only-tests: "npm:^3.1.0"
     jest: "npm:^29.7.0"
@@ -1260,10 +1260,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bignumber.js@npm:^9.1.1":
-  version: 9.3.1
-  resolution: "bignumber.js@npm:9.3.1"
-  checksum: 10c0/61342ba5fe1c10887f0ecf5be02ff6709271481aff48631f86b4d37d55a99b87ce441cfd54df3d16d10ee07ceab7e272fc0be430c657ffafbbbf7b7d631efb75
+"bignumber.js@npm:^11.0.0":
+  version: 11.1.5
+  resolution: "bignumber.js@npm:11.1.5"
+  checksum: 10c0/8e829402c6c190d92becb2495d62581c66f170deae99f43ae859e54cdc586d4375c752131d07f60fcc709b84c9ca4c362623c97f3703629e69792c7bb1def00c
   languageName: node
   linkType: hard
 
